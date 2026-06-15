@@ -4,6 +4,7 @@ import Countdown from "./Countdown";
 import ConfirmButton from "./ConfirmButton";
 import FloatingDecor from "./FloatingDecor";
 import MusicToggle from "./MusicToggle";
+import MusicPrompt from "./MusicPrompt";
 
 function formatDate(iso: string): string {
   try {
@@ -20,7 +21,6 @@ function formatDate(iso: string): string {
   }
 }
 
-// Build a Google Calendar "add event" link (no file needed).
 function googleCalendarUrl(): string {
   const start = new Date(config.eventDateISO);
   const end = new Date(
@@ -38,6 +38,20 @@ function googleCalendarUrl(): string {
   return `https://calendar.google.com/calendar/render?${params.toString()}`;
 }
 
+function HeroIllustration() {
+  if (config.assets.heroImageUrl) {
+    return (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        src={`${config.basePath}${config.assets.heroImageUrl}`}
+        alt="Ositos"
+        className="mx-auto max-h-60 w-auto animate-floaty drop-shadow-md"
+      />
+    );
+  }
+  return <div className="animate-floaty text-7xl sm:text-8xl">🧸✈️🧸</div>;
+}
+
 export default function Invitation({ group }: { group: Group }) {
   const ev = config.event;
   const whatsappUrl = config.whatsappNumber
@@ -52,15 +66,25 @@ export default function Invitation({ group }: { group: Group }) {
       <MusicToggle />
 
       <div className="relative z-10 mx-auto max-w-2xl px-4 py-10 sm:py-16">
-        {/* Hero */}
+        {/* Music prompt (only if a track is configured) */}
+        <div className="mb-8">
+          <MusicPrompt />
+        </div>
+
+        {/* Hero / banner */}
         <header className="text-center">
-          <div className="text-6xl sm:text-7xl animate-floaty">🧸</div>
-          <p className="mt-4 text-sm uppercase tracking-[0.3em] text-ink/50">
+          <p className="text-sm uppercase tracking-[0.3em] text-ink/50">
             {ev.subtitle} · {ev.hosts}
           </p>
-          <h1 className="mt-2 font-display text-4xl sm:text-6xl font-bold text-ositoDark">
-            {ev.title}
+          <h1 className="banner-script mt-2 text-5xl sm:text-6xl leading-none">
+            {config.cover.bannerTop}
           </h1>
+          <div className="my-3">
+            <HeroIllustration />
+          </div>
+          <h2 className="banner-script text-4xl sm:text-5xl leading-none">
+            {config.cover.bannerBottom}
+          </h2>
           <p className="mt-5 font-display text-2xl sm:text-3xl">
             <span className="text-boy">💙</span>{" "}
             <span className="text-ink/80">{ev.question}</span>{" "}

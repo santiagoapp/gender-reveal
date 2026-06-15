@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { config } from "@/lib/config";
+import MusicProvider from "@/components/MusicProvider";
 
 export const metadata: Metadata = {
   title: `${config.event.title} · ${config.event.hosts}`,
@@ -27,7 +28,9 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <main className="bg-reveal min-h-screen w-full">{children}</main>
+        <MusicProvider>
+          <main className="bg-paper min-h-screen w-full">{children}</main>
+        </MusicProvider>
       </body>
     </html>
   );

@@ -10,24 +10,137 @@ body {
   @apply bg-cream text-ink font-body antialiased;
 }
 
-/* Warm "ositos" backdrop: caramel + soft pink/blue glows */
-.bg-reveal {
-  background:
-    radial-gradient(55rem 55rem at 10% -10%, rgba(255, 179, 200, 0.40), transparent 60%),
-    radial-gradient(55rem 55rem at 100% 0%, rgba(158, 197, 255, 0.40), transparent 60%),
-    radial-gradient(45rem 45rem at 50% 120%, rgba(176, 125, 86, 0.20), transparent 60%),
-    #fff7ef;
+/* Watercolor paper backdrop: soft pink/blue glows + subtle paper grain */
+.bg-paper {
+  background-color: #fdf6ee;
+  background-image:
+    radial-gradient(40rem 40rem at 8% 4%, rgba(255, 179, 200, 0.30), transparent 55%),
+    radial-gradient(40rem 40rem at 96% 8%, rgba(158, 197, 255, 0.30), transparent 55%),
+    radial-gradient(45rem 45rem at 50% 116%, rgba(176, 125, 86, 0.16), transparent 60%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
 }
 
 .card {
   @apply bg-white/80 backdrop-blur rounded-3xl shadow-xl ring-1 ring-black/5;
 }
 
-/* Section heading divider with little bear */
 .section-title {
   @apply text-center font-display text-2xl text-ink/80;
 }
 .section-title::after {
   content: "🐾";
   @apply block mt-2 text-base opacity-50;
+}
+
+/* ── Banner "Revelación / de Género" ── */
+.banner-script {
+  @apply font-display font-bold text-osito drop-shadow-sm;
+}
+
+/* ── Round play button (music prompt) ── */
+.play-btn {
+  @apply grid h-16 w-16 place-items-center rounded-full bg-girl text-white text-2xl shadow-lg transition hover:scale-105 active:scale-95;
+}
+
+/* ── Envelope cover ── */
+.cover {
+  @apply fixed inset-0 z-50 flex flex-col items-center justify-center gap-6 px-6 text-center;
+  transition:
+    opacity 0.7s ease 0.45s,
+    transform 0.7s ease 0.45s;
+}
+.cover--opening {
+  opacity: 0;
+  transform: scale(1.06);
+  pointer-events: none;
+}
+
+.envelope {
+  position: relative;
+  width: min(20rem, 80vw);
+  height: min(12rem, 48vw);
+  perspective: 1100px;
+}
+.envelope__body {
+  position: absolute;
+  inset: 0;
+  border-radius: 0 0 14px 14px;
+  background: linear-gradient(#bb875d, #a36e47);
+  box-shadow: 0 18px 40px rgba(90, 60, 35, 0.35);
+}
+/* Diagonal side folds for a paper-envelope look */
+.envelope__body::before,
+.envelope__body::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  width: 52%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.06);
+}
+.envelope__body::before {
+  left: 0;
+  clip-path: polygon(0 0, 100% 100%, 0 100%);
+}
+.envelope__body::after {
+  right: 0;
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+}
+/* Closed flap: downward triangle covering the top half */
+.envelope__flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: min(10rem, 40vw) solid transparent;
+  border-right: min(10rem, 40vw) solid transparent;
+  border-top: min(6.5rem, 26vw) solid #a87750;
+  transform-origin: top center;
+  transition: transform 0.85s ease;
+  z-index: 3;
+}
+.cover--opening .envelope__flap {
+  transform: rotateX(180deg);
+  z-index: 1;
+}
+
+.seal {
+  position: absolute;
+  left: 50%;
+  top: 56%;
+  transform: translate(-50%, -50%);
+  z-index: 4;
+  cursor: pointer;
+  transition:
+    transform 0.8s ease,
+    opacity 0.8s ease;
+  animation: floaty 3.5s ease-in-out infinite;
+}
+.seal:hover {
+  filter: brightness(1.05);
+}
+.cover--opening .seal {
+  transform: translate(-50%, -190%) scale(1.4);
+  opacity: 0;
+  animation: none;
+}
+
+/* Revealed invitation entrance */
+.reveal-wrap {
+  opacity: 1;
+}
+.reveal-wrap.is-open {
+  animation: fadeUp 0.9s ease-out both;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

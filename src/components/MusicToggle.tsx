@@ -1,45 +1,22 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { config } from "@/lib/config";
+import { useMusic } from "./MusicProvider";
 
-// Floating background-music button. Browsers block autoplay, so playback
-// starts on the first tap. Hidden entirely if no musicUrl is configured.
+// Floating play/pause button, fixed bottom-right.
 export default function MusicToggle() {
-  const ref = useRef<HTMLAudioElement | null>(null);
-  const [playing, setPlaying] = useState(false);
-
-  if (!config.musicUrl) return null;
-
-  const src = `${config.basePath}${config.musicUrl}`;
-
-  function toggle() {
-    const el = ref.current;
-    if (!el) return;
-    if (playing) {
-      el.pause();
-      setPlaying(false);
-    } else {
-      el.play().then(
-        () => setPlaying(true),
-        () => setPlaying(false)
-      );
-    }
-  }
+  const m = useMusic();
+  if (!m || !m.enabled) return null;
 
   return (
-    <>
-      <audio ref={ref} src={src} loop preload="none" />
-      <button
-        type="button"
-        onClick={toggle}
-        aria-label={playing ? "Pausar música" : "Reproducir música"}
-        className="fixed bottom-4 right-4 z-50 grid h-12 w-12 place-items-center rounded-full bg-white/90 text-xl shadow-lg ring-1 ring-black/5 backdrop-blur transition hover:scale-105"
-      >
-        <span className={playing ? "animate-floaty" : ""}>
-          {playing ? "🔊" : "🔈"}
-        </span>
-      </button>
-    </>
+    <button
+      type="button"
+      onClick={m.toggle}
+      aria-label={m.playing ? "Pausar música" : "Reproducir música"}
+      className="fixed bottom-4 right-4 z-50 grid h-12 w-12 place-items-center rounded-full bg-white/90 text-xl shadow-lg ring-1 ring-black/5 backdrop-blur transition hover:scale-105"
+    >
+      <span className={m.playing ? "animate-floaty" : ""}>
+        {m.playing ? "🔊" : "🔈"}
+      </span>
+    </button>
   );
 }
