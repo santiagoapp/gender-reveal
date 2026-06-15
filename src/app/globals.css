@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  @apply bg-cream text-ink font-body antialiased;
+}
+
+/* Soft gradient backdrop with floating pastel blobs */
+.bg-reveal {
+  background:
+    radial-gradient(60rem 60rem at 12% -10%, rgba(255, 179, 200, 0.35), transparent 60%),
+    radial-gradient(55rem 55rem at 100% 0%, rgba(158, 197, 255, 0.35), transparent 60%),
+    radial-gradient(40rem 40rem at 50% 120%, rgba(255, 220, 180, 0.30), transparent 60%),
+    #fff8f3;
+}
+
+.card {
+  @apply bg-white/80 backdrop-blur rounded-3xl shadow-xl ring-1 ring-black/5;
+}
