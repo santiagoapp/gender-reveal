@@ -10,15 +10,24 @@ body {
   @apply bg-cream text-ink font-body antialiased;
 }
 
-/* Soft gradient backdrop with floating pastel blobs */
+/* Warm "ositos" backdrop: caramel + soft pink/blue glows */
 .bg-reveal {
   background:
-    radial-gradient(60rem 60rem at 12% -10%, rgba(255, 179, 200, 0.35), transparent 60%),
-    radial-gradient(55rem 55rem at 100% 0%, rgba(158, 197, 255, 0.35), transparent 60%),
-    radial-gradient(40rem 40rem at 50% 120%, rgba(255, 220, 180, 0.30), transparent 60%),
-    #fff8f3;
+    radial-gradient(55rem 55rem at 10% -10%, rgba(255, 179, 200, 0.40), transparent 60%),
+    radial-gradient(55rem 55rem at 100% 0%, rgba(158, 197, 255, 0.40), transparent 60%),
+    radial-gradient(45rem 45rem at 50% 120%, rgba(176, 125, 86, 0.20), transparent 60%),
+    #fff7ef;
 }
 
 .card {
   @apply bg-white/80 backdrop-blur rounded-3xl shadow-xl ring-1 ring-black/5;
+}
+
+/* Section heading divider with little bear */
+.section-title {
+  @apply text-center font-display text-2xl text-ink/80;
+}
+.section-title::after {
+  content: "🐾";
+  @apply block mt-2 text-base opacity-50;
 }

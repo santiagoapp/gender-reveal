@@ -9,7 +9,7 @@ export default async function Home() {
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-20 text-center">
-      <div className="text-6xl animate-floaty">🎈</div>
+      <div className="text-6xl animate-floaty">🧸</div>
       <h1 className="mt-6 font-display text-4xl sm:text-5xl font-bold">
         {config.event.title}
       </h1>
