@@ -5,6 +5,7 @@ import ConfirmButton from "./ConfirmButton";
 import FloatingDecor from "./FloatingDecor";
 import MusicToggle from "./MusicToggle";
 import MusicPrompt from "./MusicPrompt";
+import HeroBears from "./HeroBears";
 
 function formatDate(iso: string): string {
   try {
@@ -38,20 +39,6 @@ function googleCalendarUrl(): string {
   return `https://calendar.google.com/calendar/render?${params.toString()}`;
 }
 
-function HeroIllustration() {
-  if (config.assets.heroImageUrl) {
-    return (
-      // eslint-disable-next-line @next/next/no-img-element
-      <img
-        src={`${config.basePath}${config.assets.heroImageUrl}`}
-        alt="Ositos"
-        className="mx-auto max-h-60 w-auto animate-floaty drop-shadow-md"
-      />
-    );
-  }
-  return <div className="animate-floaty text-7xl sm:text-8xl">🧸✈️🧸</div>;
-}
-
 export default function Invitation({ group }: { group: Group }) {
   const ev = config.event;
   const whatsappUrl = config.whatsappNumber
@@ -80,7 +67,7 @@ export default function Invitation({ group }: { group: Group }) {
             {config.cover.bannerTop}
           </h1>
           <div className="my-3">
-            <HeroIllustration />
+            <HeroBears className="max-h-56" />
           </div>
           <h2 className="banner-script text-4xl sm:text-5xl leading-none">
             {config.cover.bannerBottom}

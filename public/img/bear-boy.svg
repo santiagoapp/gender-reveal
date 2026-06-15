@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 290" width="240" height="290" role="img" aria-label="Osito azul">
+  <defs>
+    <radialGradient id="bbHead" cx="42%" cy="34%" r="78%">
+      <stop offset="0%" stop-color="#e0c096"/>
+      <stop offset="68%" stop-color="#c89c6c"/>
+      <stop offset="100%" stop-color="#b0855a"/>
+    </radialGradient>
+    <linearGradient id="bbBody" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#d0a574"/>
+      <stop offset="100%" stop-color="#b0855a"/>
+    </linearGradient>
+  </defs>
+  <!-- body -->
+  <ellipse cx="120" cy="205" rx="66" ry="60" fill="url(#bbBody)"/>
+  <ellipse cx="120" cy="214" rx="40" ry="42" fill="#efdcbe" opacity="0.9"/>
+  <!-- legs -->
+  <ellipse cx="84" cy="255" rx="27" ry="20" fill="url(#bbBody)"/>
+  <ellipse cx="156" cy="255" rx="27" ry="20" fill="url(#bbBody)"/>
+  <ellipse cx="84" cy="257" rx="15" ry="10" fill="#efdcbe"/>
+  <ellipse cx="156" cy="257" rx="15" ry="10" fill="#efdcbe"/>
+  <g fill="#b88f60"><circle cx="78" cy="254" r="2.4"/><circle cx="90" cy="254" r="2.4"/><circle cx="150" cy="254" r="2.4"/><circle cx="162" cy="254" r="2.4"/></g>
+  <!-- arms (right raised, waving) -->
+  <ellipse cx="56" cy="196" rx="19" ry="28" fill="url(#bbBody)" transform="rotate(20 56 196)"/>
+  <ellipse cx="186" cy="156" rx="17" ry="26" fill="url(#bbBody)" transform="rotate(-34 186 156)"/>
+  <!-- head -->
+  <circle cx="120" cy="98" r="64" fill="url(#bbHead)"/>
+  <!-- ears -->
+  <circle cx="74" cy="52" r="24" fill="url(#bbHead)"/>
+  <circle cx="166" cy="52" r="24" fill="url(#bbHead)"/>
+  <circle cx="74" cy="52" r="12" fill="#d6a0a0"/>
+  <circle cx="166" cy="52" r="12" fill="#d6a0a0"/>
+  <!-- cheeks -->
+  <ellipse cx="80" cy="114" rx="13" ry="10" fill="#f2b3c0" opacity="0.7"/>
+  <ellipse cx="160" cy="114" rx="13" ry="10" fill="#f2b3c0" opacity="0.7"/>
+  <!-- muzzle -->
+  <ellipse cx="120" cy="118" rx="34" ry="28" fill="#f3e3c8"/>
+  <!-- nose + mouth -->
+  <ellipse cx="120" cy="106" rx="9" ry="7" fill="#5d4029"/>
+  <path d="M120 113 v7 M120 120 q-8 6 -15 2 M120 120 q8 6 15 2" stroke="#5d4029" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+  <!-- eyes -->
+  <circle cx="99" cy="94" r="7.5" fill="#3f2a19"/>
+  <circle cx="141" cy="94" r="7.5" fill="#3f2a19"/>
+  <circle cx="101.5" cy="91.5" r="2.4" fill="#fff"/>
+  <circle cx="143.5" cy="91.5" r="2.4" fill="#fff"/>
+  <!-- blue striped scarf -->
+  <path d="M68 150 q52 28 104 0 l-5 19 q-47 23 -94 0 z" fill="#7ea9d8"/>
+  <g fill="#eef3fb">
+    <rect x="88" y="151" width="9" height="23" transform="rotate(8 92 162)"/>
+    <rect x="116" y="156" width="9" height="22"/>
+    <rect x="144" y="151" width="9" height="23" transform="rotate(-8 148 162)"/>
+  </g>
+</svg>

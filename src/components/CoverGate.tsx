@@ -3,23 +3,7 @@
 import { useEffect, useState } from "react";
 import { config } from "@/lib/config";
 import { useMusic } from "./MusicProvider";
-
-function HeroIllustration() {
-  if (config.assets.heroImageUrl) {
-    return (
-      // eslint-disable-next-line @next/next/no-img-element
-      <img
-        src={`${config.basePath}${config.assets.heroImageUrl}`}
-        alt="Ositos"
-        className="mx-auto max-h-56 w-auto animate-floaty drop-shadow-md"
-      />
-    );
-  }
-  // Placeholder until a licensed illustration is dropped into /public.
-  return (
-    <div className="animate-floaty text-7xl sm:text-8xl">🧸✈️🧸</div>
-  );
-}
+import HeroBears from "./HeroBears";
 
 function WaxSeal() {
   return (
@@ -110,7 +94,7 @@ export default function CoverGate({
           <h1 className="banner-script text-5xl sm:text-6xl leading-none">
             {config.cover.bannerTop}
           </h1>
-          <HeroIllustration />
+          <HeroBears className="max-h-52" />
           <h2 className="banner-script text-4xl sm:text-5xl leading-none">
             {config.cover.bannerBottom}
           </h2>
