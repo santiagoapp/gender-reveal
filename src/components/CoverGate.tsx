@@ -106,11 +106,13 @@ export default function CoverGate({
                   </textPath>
                 </text>
               </svg>
-              <img
-                src={asset("wax-seal-teddy.png")}
-                alt=""
-                className="env__seal"
-              />
+              <span className="env__seal-wrap">
+                <img
+                  src={asset("wax-seal-teddy.png")}
+                  alt=""
+                  className="env__seal"
+                />
+              </span>
             </button>
             <p className="mt-1 animate-pop text-sm text-cocoa/70">
               Toca el sobre para abrir 👆

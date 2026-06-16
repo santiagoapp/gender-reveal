@@ -95,19 +95,25 @@ body {
 .env__arc {
   position: absolute;
   left: 50%;
-  top: 36%;
-  width: 50%;
+  top: 27%;
+  width: 52%;
   transform: translateX(-50%);
   fill: #fbf3e8;
   filter: drop-shadow(0 1px 2px rgba(74, 46, 22, 0.65));
   pointer-events: none;
 }
-.env__seal {
+/* Wrapper handles absolute centering; the inner img handles the float
+   animation so its transform never clobbers the centering offset. */
+.env__seal-wrap {
   position: absolute;
   left: 50%;
   top: 46%;
   width: 25%;
   transform: translate(-50%, -50%);
+}
+.env__seal {
+  display: block;
+  width: 100%;
   filter: drop-shadow(0 6px 9px rgba(70, 44, 20, 0.42));
   animation: floaty 3.5s ease-in-out infinite;
 }
@@ -115,12 +121,14 @@ body {
   filter: drop-shadow(0 6px 9px rgba(70, 44, 20, 0.34)) brightness(1.05);
 }
 /* On open: the seal lifts away and fades. */
-.cover--opening .env__seal {
+.cover--opening .env__seal-wrap {
   transform: translate(-50%, -240%) scale(1.35);
   opacity: 0;
   transition:
     transform 0.8s ease,
     opacity 0.8s ease;
+}
+.cover--opening .env__seal {
   animation: none;
 }
 
