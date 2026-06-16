@@ -45,8 +45,8 @@ export default function CountdownBox({ dateISO }: { dateISO: string }) {
   ];
 
   return (
-    <div className="inline-flex flex-col rounded-2xl bg-dusty px-5 py-3 text-white shadow-lg ring-1 ring-white/30 [box-shadow:inset_0_0_0_2px_rgba(255,255,255,0.85)]">
-      <div className="flex items-center justify-center gap-2 font-display text-3xl font-bold tabular-nums sm:text-4xl">
+    <div className="inline-flex flex-col rounded-2xl bg-dusty px-5 py-3 font-ui text-white shadow-lg ring-1 ring-white/30 [box-shadow:inset_0_0_0_2px_rgba(255,255,255,0.85)]">
+      <div className="flex items-center justify-center gap-2 text-3xl font-bold tabular-nums sm:text-4xl">
         {cells.map(([value], i) => (
           <span key={i} className="flex items-center gap-2">
             {i > 0 && <span className="opacity-80">:</span>}

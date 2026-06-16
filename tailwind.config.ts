@@ -20,8 +20,10 @@ const config: Config = {
         bubblegum: "#f2afc1", // pink call-to-action buttons
       },
       fontFamily: {
-        display: ['"Fraunces"', "Georgia", "serif"], // soft retro serif headings
-        body: ['"Gabriela"', "Georgia", "serif"], // warm storybook body serif
+        // Real fonts from the byyoya.com/revela-ositos Canva design.
+        display: ['"Agbalumo"', "Georgia", "serif"], // bouncy rounded display headings
+        body: ['"Lora"', "Georgia", "serif"], // elegant serif body
+        ui: ['"Arimo"', "system-ui", "sans-serif"], // sans for countdown / labels
       },
       keyframes: {
         floaty: {

@@ -55,7 +55,7 @@ export default function Home() {
             className="cutout w-full"
           />
           <span className="absolute inset-0 flex items-center justify-center pr-[14%]">
-            <span className="font-display font-bold italic text-cocoa drop-shadow-sm text-[clamp(2rem,9.5vw,3.4rem)]">
+            <span className="font-display text-cocoa drop-shadow-sm text-[clamp(2rem,9.5vw,3.4rem)]">
               Revelación
             </span>
           </span>
@@ -73,7 +73,7 @@ export default function Home() {
         />
         <Decor src="three-pink-stars.png" className="-left-2 bottom-24 w-20" />
 
-        <h2 className="font-display font-bold italic text-cocoa text-[clamp(2.25rem,11vw,3.75rem)]">
+        <h2 className="font-display text-cocoa text-[clamp(2.25rem,11vw,3.75rem)]">
           de Género
         </h2>
 
@@ -85,7 +85,7 @@ export default function Home() {
           <span className="font-semibold">{ev.question}</span> {ev.callToAction}
         </p>
 
-        <h3 className="mt-7 font-display font-bold italic text-cocoaDark text-[clamp(2.25rem,10vw,3.75rem)]">
+        <h3 className="mt-7 font-display text-cocoaDark text-[clamp(2.25rem,10vw,3.75rem)]">
           {ev.hosts}
         </h3>
       </section>
@@ -110,7 +110,7 @@ export default function Home() {
                     className="h-16 max-w-none mix-blend-screen"
                   />
                 </div>
-                <p className="mt-2 font-display font-bold italic leading-tight text-[clamp(1.25rem,5.5vw,1.7rem)]">
+                <p className="mt-2 font-display leading-tight text-[clamp(1.25rem,5.5vw,1.7rem)]">
                   {ev.dateLabel}
                   <br />
                   {ev.dateValue}
@@ -124,7 +124,7 @@ export default function Home() {
                     className="h-16 max-w-none mix-blend-screen"
                   />
                 </div>
-                <p className="mt-2 font-display font-bold italic text-[clamp(1.25rem,5.5vw,1.7rem)]">
+                <p className="mt-2 font-display text-[clamp(1.25rem,5.5vw,1.7rem)]">
                   {ev.timeValue}
                 </p>
               </div>
@@ -145,7 +145,7 @@ export default function Home() {
 
       {/* ─────────────── COUNTDOWN + LOCATION ─────────────── */}
       <section className="relative px-6 pb-8 pt-6 text-center">
-        <p className="font-display font-semibold italic text-cocoa text-[clamp(1.6rem,7vw,2.25rem)]">
+        <p className="font-display text-cocoa text-[clamp(1.6rem,7vw,2.25rem)]">
           Sólo Faltan:
         </p>
         <div className="mt-4 flex justify-center">
@@ -169,7 +169,7 @@ export default function Home() {
           />
         </div>
 
-        <p className="mt-8 font-display font-semibold italic leading-snug text-cocoa text-[clamp(1.25rem,5.5vw,1.7rem)]">
+        <p className="mt-8 font-display leading-snug text-cocoa text-[clamp(1.25rem,5.5vw,1.7rem)]">
           Te esperamos en:
           <br />
           {ev.locationName}

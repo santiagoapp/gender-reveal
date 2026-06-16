@@ -57,7 +57,7 @@ export default function CoverGate({
                 className="cutout w-full"
               />
               <span className="absolute inset-0 flex items-center justify-center pr-[14%]">
-                <span className="font-display font-bold italic text-cocoa drop-shadow-sm text-[clamp(2rem,9.5vw,3.4rem)]">
+                <span className="font-display text-cocoa drop-shadow-sm text-[clamp(2rem,9.5vw,3.4rem)]">
                   {config.cover.bannerTop}
                 </span>
               </span>
@@ -75,7 +75,7 @@ export default function CoverGate({
               className="cutout -mt-[4%] w-[84%] max-w-[21rem]"
             />
 
-            <h2 className="-mt-[2%] font-display font-bold italic text-cocoa text-[clamp(2.25rem,11vw,3.75rem)]">
+            <h2 className="-mt-[2%] font-display text-cocoa text-[clamp(2.25rem,11vw,3.75rem)]">
               {config.cover.bannerBottom}
             </h2>
 
@@ -99,7 +99,7 @@ export default function CoverGate({
                   fontSize="20"
                   fontWeight="700"
                   letterSpacing="1.4"
-                  style={{ fontFamily: "Quicksand, sans-serif" }}
+                  style={{ fontFamily: "Lora, serif" }}
                 >
                   <textPath href="#env-arc" startOffset="50%" textAnchor="middle">
                     {config.cover.sealText}
