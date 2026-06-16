@@ -6,26 +6,39 @@
 
 export const config = {
   // Fixed event date/time used by the countdown. ISO 8601 with timezone offset.
-  eventDateISO: "2026-08-15T16:00:00-05:00",
+  // Domingo 13 de Diciembre, 3:00 p.m. (hora de Colombia, -05:00).
+  eventDateISO: "2026-12-13T15:00:00-05:00",
   // Duración estimada (horas) — usada para el botón "Agregar al calendario".
   eventDurationHours: 4,
 
   event: {
-    title: "Revela Ositos",
-    subtitle: "Gender Reveal",
-    hosts: "Santiago & Familia",
+    title: "Revelación de Género",
+    subtitle: "Revelación de Género",
+    hosts: "Cristian y Laura",
+
     intro:
-      "Nuestro corazón está lleno de ilusión y muy pronto descubriremos un secreto muy especial.",
-    question: "¿Osito azul o osito rosa?",
-    callToAction: "¡Ven a descubrirlo con nosotros!",
+      "Nuestro corazón está lleno de ilusión y muy pronto descubriremos un gran secreto…",
+    question: "¿Quién viene en camino?",
+    callToAction:
+      "Acompáñanos a celebrar esta dulce espera y a vivir juntos la emoción de conocer una nueva sorpresa que cambiará nuestras vidas para siempre.",
 
-    locationName: "Por definir",
-    locationAddress: "Dirección por definir",
-    locationMapsUrl: "",
+    // Fecha legible mostrada en la tarjeta rosa.
+    dateLabel: "Domingo",
+    dateValue: "13 de Diciembre",
+    timeValue: "3:00 p.m.",
 
-    dressCode: "Ven de azul 💙 o rosa 💗 según tu apuesta",
-    gift: "Tu presencia es nuestro mejor regalo 🧸",
-    note: "Confirma tu asistencia antes del evento. ¡Te esperamos!",
+    locationName: "Salón de Eventos Villa Isabella",
+    locationAddress: "Calle 31 # 23-622",
+    locationArea: "Barrio Acacías Norte",
+    locationMapsUrl: "https://maps.google.com/?q=Salón+de+Eventos+Villa+Isabella+Acacías",
+
+    giftBoy: "Si eres team niño trae pañales etapa 2 en adelante",
+    giftGirl: "Si eres team niña trae pañitos",
+    dressCode: "Prendas de color azul o rosado",
+    note: "Para organizar todo con amor, agradecemos que nos confirmes tu asistencia hasta el 5 de diciembre.",
+    rsvpLabel: "CON LA MAMÁ",
+    // Kept for the legacy per-group RSVP route (src/app/[slug]).
+    gift: "",
   },
 
   // Portada tipo "sobre" (envelope) que se abre al hacer clic en el sello.
@@ -45,7 +58,8 @@ export const config = {
   // "/music/cancion.mp3". Déjalo vacío para ocultar el reproductor.
   musicUrl: "",
   music: {
-    prompt: "Dale play y déjate envolver por la melodía de este momento.",
+    prompt:
+      "Dale play y déjate envolver por la melodía que inspira este momento.",
   },
 
   // WhatsApp para dudas / confirmar por chat (opcional). Solo dígitos con

@@ -5,17 +5,23 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // "Ositos" (teddy bear) gender-reveal palette.
+        // "Ositos" (teddy bear) gender-reveal palette — matched to the
+        // byyoya.com/revelaci-osi watercolor invitation.
         osito: "#b07d56", // caramel teddy brown
         ositoDark: "#8a5e3c",
         boy: "#9ec5ff", // osito azul
         girl: "#ffb3c8", // osito rosa
-        cream: "#fff7ef",
+        cream: "#fbf4ea", // warm paper background
         ink: "#4a3a2c",
+        cocoa: "#a25e3a", // terracotta brown used for body & heading text
+        cocoaDark: "#8a4a2c",
+        dusty: "#6f8db0", // dusty blue countdown box
+        rosepanel: "#f1bdb9", // pink torn-paper panel
+        bubblegum: "#f2afc1", // pink call-to-action buttons
       },
       fontFamily: {
-        display: ['"Playfair Display"', "serif"],
-        body: ['"Quicksand"', "system-ui", "sans-serif"],
+        display: ['"Fraunces"', "Georgia", "serif"], // soft retro serif headings
+        body: ['"Gabriela"', "Georgia", "serif"], // warm storybook body serif
       },
       keyframes: {
         floaty: {
