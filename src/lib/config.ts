@@ -27,15 +27,26 @@ export const config = {
     dateValue: "2 de Agosto",
     timeValue: "3:00 p.m.",
 
+    // Cuenta regresiva.
+    countdownTitle: "Sólo Faltan:",
+
+    // Ubicación.
+    locationIntro: "Te esperamos en:",
     locationName: "Salón de Eventos Villa Isabella",
     locationAddress: "Calle 31 # 23-622",
     locationArea: "Barrio Acacías Norte",
     locationMapsUrl: "https://maps.google.com/?q=Salón+de+Eventos+Villa+Isabella+Acacías",
+    locationButton: "Ver ubicación",
 
+    // Regalos / código de vestimenta.
     giftBoy: "Si eres team niño trae pañales etapa 2 en adelante",
     giftGirl: "Si eres team niña trae pañitos",
+    dressCodeLabel: "Código de Vestimenta:",
     dressCode: "Prendas de color azul o rosado",
-    note: "Para organizar todo con amor, agradecemos que nos confirmes tu asistencia hasta el 5 de diciembre.",
+
+    // Confirmación. {deadline} se reemplaza con rsvpDeadline al renderizar.
+    rsvpDeadline: "26 de julio",
+    note: "Para organizar todo con amor, agradecemos que nos confirmes tu asistencia hasta el {deadline}.",
     rsvpLabel: "CON LA MAMÁ",
     // Kept for the legacy per-group RSVP route (src/app/[slug]).
     gift: "",
@@ -46,6 +57,13 @@ export const config = {
     bannerTop: "Revelación",
     bannerBottom: "de Género",
     sealText: "VER INVITACIÓN",
+    hint: "Toca el sobre para abrir 👆",
+  },
+
+  // Etiquetas de la cuenta regresiva.
+  countdown: {
+    labels: { days: "DÍAS", hours: "HOR", minutes: "MIN", seconds: "SEG" },
+    done: "¡Hoy es el gran día! 🎉",
   },
 
   // Ilustraciones (acuarela). Coloca TUS imágenes con licencia en /public y

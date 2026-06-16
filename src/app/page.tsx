@@ -56,7 +56,7 @@ export default function Home() {
           />
           <span className="absolute inset-0 flex items-center justify-center pr-[14%]">
             <span className="font-display text-cocoa drop-shadow-sm text-[clamp(2rem,9.5vw,3.4rem)]">
-              Revelación
+              {config.cover.bannerTop}
             </span>
           </span>
           <Decor
@@ -74,7 +74,7 @@ export default function Home() {
         <Decor src="three-pink-stars.png" className="-left-2 bottom-24 w-20" />
 
         <h2 className="font-display text-cocoa text-[clamp(2.25rem,11vw,3.75rem)]">
-          de Género
+          {config.cover.bannerBottom}
         </h2>
 
         <p className="mx-auto mt-6 max-w-[22rem] leading-snug text-[clamp(1.05rem,4.6vw,1.3rem)]">
@@ -146,7 +146,7 @@ export default function Home() {
       {/* ─────────────── COUNTDOWN + LOCATION ─────────────── */}
       <section className="relative px-6 pb-8 pt-6 text-center">
         <p className="font-display text-cocoa text-[clamp(1.6rem,7vw,2.25rem)]">
-          Sólo Faltan:
+          {ev.countdownTitle}
         </p>
         <div className="mt-4 flex justify-center">
           <CountdownBox dateISO={config.eventDateISO} />
@@ -170,7 +170,7 @@ export default function Home() {
         </div>
 
         <p className="mt-8 font-display leading-snug text-cocoa text-[clamp(1.25rem,5.5vw,1.7rem)]">
-          Te esperamos en:
+          {ev.locationIntro}
           <br />
           {ev.locationName}
           <br />
@@ -186,7 +186,7 @@ export default function Home() {
             rel="noopener noreferrer"
             className="btn-pink mt-5"
           >
-            Ver ubicación
+            {ev.locationButton}
           </a>
         )}
         <Decor src="blue-watercolor-star.png" className="-right-1 bottom-2 w-16" />
@@ -211,7 +211,7 @@ export default function Home() {
           <p className="mx-auto max-w-[16rem]">{ev.giftBoy}</p>
           <p className="mx-auto max-w-[16rem]">{ev.giftGirl}</p>
           <p className="mx-auto max-w-[18rem]">
-            <span className="font-semibold">Código de Vestimenta:</span>
+            <span className="font-semibold">{ev.dressCodeLabel}</span>
             <br />
             {ev.dressCode}
           </p>
@@ -220,7 +220,7 @@ export default function Home() {
         <div className="clear-both" />
 
         <p className="mx-auto mt-10 max-w-[22rem] leading-snug text-[clamp(1.05rem,4.6vw,1.3rem)]">
-          {ev.note}
+          {ev.note.replace("{deadline}", ev.rsvpDeadline)}
         </p>
 
         {config.whatsappNumber ? (

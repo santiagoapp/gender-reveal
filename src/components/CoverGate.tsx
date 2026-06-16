@@ -115,7 +115,7 @@ export default function CoverGate({
               </span>
             </button>
             <p className="mt-1 animate-pop text-sm text-cocoa/70">
-              Toca el sobre para abrir 👆
+              {config.cover.hint}
             </p>
           </div>
         </div>

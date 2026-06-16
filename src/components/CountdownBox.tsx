@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { config } from "@/lib/config";
 
 type Parts = { days: number; hours: number; minutes: number; seconds: number };
 
@@ -37,11 +38,12 @@ export default function CountdownBox({ dateISO }: { dateISO: string }) {
     return () => clearInterval(id);
   }, [target]);
 
+  const { labels } = config.countdown;
   const cells: Array<[string, string]> = [
-    [pad(parts.days, 3), "DÍAS"],
-    [pad(parts.hours), "HOR"],
-    [pad(parts.minutes), "MIN"],
-    [pad(parts.seconds), "SEG"],
+    [pad(parts.days, 3), labels.days],
+    [pad(parts.hours), labels.hours],
+    [pad(parts.minutes), labels.minutes],
+    [pad(parts.seconds), labels.seconds],
   ];
 
   return (
