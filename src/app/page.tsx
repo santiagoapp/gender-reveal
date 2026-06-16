@@ -1,5 +1,6 @@
 import { config } from "@/lib/config";
 import { asset } from "@/lib/assets";
+import CoverGate from "@/components/CoverGate";
 import PlayButton from "@/components/PlayButton";
 import CountdownBox from "@/components/CountdownBox";
 
@@ -32,7 +33,8 @@ function Decor({
 
 export default function Home() {
   return (
-    <div className="relative mx-auto w-full max-w-[460px] overflow-hidden bg-cream font-body text-cocoa">
+    <CoverGate>
+      <div className="relative mx-auto w-full max-w-[460px] overflow-hidden bg-cream font-body text-cocoa">
       {/* ───────────────────────── HERO ───────────────────────── */}
       <section className="relative px-6 pb-4 pt-10 text-center">
         <Decor src="blue-watercolor-stars.png" className="left-3 top-6 w-24 rotate-[-6deg]" />
@@ -249,6 +251,7 @@ export default function Home() {
           className="-right-2 -bottom-2 w-28"
         />
       </section>
-    </div>
+      </div>
+    </CoverGate>
   );
 }

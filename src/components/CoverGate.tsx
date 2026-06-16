@@ -2,8 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { config } from "@/lib/config";
+import { asset } from "@/lib/assets";
 import { useMusic } from "./MusicProvider";
-import HeroBears from "./HeroBears";
+
+/* eslint-disable @next/next/no-img-element */
 
 function WaxSeal() {
   return (
@@ -85,32 +87,50 @@ export default function CoverGate({
 
       {!opened && (
         <div
-          className={`cover bg-paper ${opening ? "cover--opening" : ""}`}
+          className={`cover bg-cream bg-paper font-body text-cocoa ${
+            opening ? "cover--opening" : ""
+          }`}
           aria-hidden={opened}
         >
-          <p className="text-sm uppercase tracking-[0.3em] text-ink/50">
-            {config.event.subtitle}
-          </p>
-          <h1 className="banner-script text-5xl sm:text-6xl leading-none">
-            {config.cover.bannerTop}
-          </h1>
-          <HeroBears className="max-h-52" />
-          <h2 className="banner-script text-4xl sm:text-5xl leading-none">
+          {/* Banner "Revelación" with the perched bird */}
+          <div className="relative w-full max-w-[20rem]">
+            <img src={asset("peach-watercolor-banner.png")} alt="" className="cutout w-full" />
+            <span className="absolute inset-0 flex items-center justify-center">
+              <span className="font-display text-3xl font-semibold italic text-cocoa drop-shadow-sm sm:text-4xl">
+                {config.cover.bannerTop}
+              </span>
+            </span>
+            <img
+              src={asset("yellow-watercolor-bird.png")}
+              alt=""
+              className="cutout absolute -right-2 -top-5 w-16"
+            />
+          </div>
+
+          {/* Two aviator bears in the airplane */}
+          <img
+            src={asset("two-teddy-bears-airplane.png")}
+            alt="Dos ositos aviadores en una avioneta"
+            className="cutout -my-2 w-[78%] max-w-[20rem]"
+          />
+
+          <h2 className="font-display text-4xl font-semibold italic text-cocoa">
             {config.cover.bannerBottom}
           </h2>
 
+          {/* Envelope + wax seal — tap to open */}
           <button
             type="button"
             onClick={open}
-            className="envelope mt-2 focus:outline-none"
+            className="envelope mt-3 focus:outline-none"
             aria-label={config.cover.sealText}
           >
             <span className="envelope__body" />
             <span className="envelope__flap" />
             <WaxSeal />
           </button>
-          <p className="mt-1 animate-pop text-sm text-ink/50">
-            Toca el sello para abrir 👆
+          <p className="mt-1 animate-pop text-sm text-cocoa/70">
+            Toca el sobre para abrir 👆
           </p>
         </div>
       )}
