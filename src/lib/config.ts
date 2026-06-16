@@ -6,15 +6,15 @@
 
 export const config = {
   // Fixed event date/time used by the countdown. ISO 8601 with timezone offset.
-  // Domingo 13 de Diciembre, 3:00 p.m. (hora de Colombia, -05:00).
-  eventDateISO: "2026-12-13T15:00:00-05:00",
+  // Domingo 2 de Agosto, 3:00 p.m. (hora de Colombia, -05:00).
+  eventDateISO: "2026-08-02T15:00:00-05:00",
   // Duración estimada (horas) — usada para el botón "Agregar al calendario".
   eventDurationHours: 4,
 
   event: {
     title: "Revelación de Género",
     subtitle: "Revelación de Género",
-    hosts: "Cristian y Laura",
+    hosts: "Leidy y Santiago",
 
     intro:
       "Nuestro corazón está lleno de ilusión y muy pronto descubriremos un gran secreto…",
@@ -24,7 +24,7 @@ export const config = {
 
     // Fecha legible mostrada en la tarjeta rosa.
     dateLabel: "Domingo",
-    dateValue: "13 de Diciembre",
+    dateValue: "2 de Agosto",
     timeValue: "3:00 p.m.",
 
     locationName: "Salón de Eventos Villa Isabella",
