@@ -11,15 +11,21 @@
  *        - Quién tiene acceso: Cualquier persona.
  *   5. Copia la URL /exec → guárdala como secret APPS_SCRIPT_URL en GitHub.
  *
- * El sitio estático hace POST { slug, confirm, token } y este script escribe
- * "Confirmado" (o "No asiste") en la columna F de TODAS las filas cuyo slug
- * (columna G) coincida. Un botón confirma a todo el grupo.
+ * El sitio hace POST { slug, confirmed, token }:
+ *   - slug:      identifica el grupo (columna G).
+ *   - confirmed: arreglo con los "No." (columna A) de quienes SÍ asisten.
+ * Para cada fila cuyo slug (col G) coincida, escribe en la columna F:
+ *   "Confirmado" si su "No." está en `confirmed`, de lo contrario "No asiste".
+ *
+ * Compatibilidad: si llega { slug, confirm: true|false } (sin `confirmed`),
+ * confirma/declina a TODO el grupo como antes.
  */
 
 var SHEET_TAB = "Participación";
 var TOKEN = "CAMBIA_ESTE_TOKEN"; // debe coincidir con NEXT_PUBLIC_CONFIRM_TOKEN
-var SLUG_COL = 7; // columna G
+var NO_COL = 1; // columna A ("No.")
 var CONFIRM_COL = 6; // columna F
+var SLUG_COL = 7; // columna G
 
 function doPost(e) {
   try {
@@ -32,21 +38,39 @@ function doPost(e) {
     var slug = String(body.slug || "").trim();
     if (!slug) return json({ ok: false, error: "missing slug" });
 
-    var value = body.confirm === false ? "No asiste" : "Confirmado";
-
     var sheet = SpreadsheetApp.getActive().getSheetByName(SHEET_TAB);
     if (!sheet) return json({ ok: false, error: "sheet tab not found" });
 
     var lastRow = sheet.getLastRow();
     if (lastRow < 2) return json({ ok: true, updated: 0 });
 
-    var slugs = sheet.getRange(2, SLUG_COL, lastRow - 1, 1).getValues();
+    var n = lastRow - 1;
+    var nos = sheet.getRange(2, NO_COL, n, 1).getValues();
+    var slugs = sheet.getRange(2, SLUG_COL, n, 1).getValues();
+
+    // Per-person mode: a `confirmed` array of "No." ids.
+    var perPerson = Object.prototype.toString.call(body.confirmed) === "[object Array]";
+    var confirmedSet = {};
+    if (perPerson) {
+      for (var k = 0; k < body.confirmed.length; k++) {
+        confirmedSet[String(body.confirmed[k]).trim()] = true;
+      }
+    }
+    // Whole-group fallback.
+    var groupValue = body.confirm === false ? "No asiste" : "Confirmado";
+
     var updated = 0;
     for (var i = 0; i < slugs.length; i++) {
-      if (String(slugs[i][0]).trim() === slug) {
-        sheet.getRange(i + 2, CONFIRM_COL).setValue(value);
-        updated++;
+      if (String(slugs[i][0]).trim() !== slug) continue;
+      var value;
+      if (perPerson) {
+        var id = String(nos[i][0]).trim();
+        value = confirmedSet[id] ? "Confirmado" : "No asiste";
+      } else {
+        value = groupValue;
       }
+      sheet.getRange(i + 2, CONFIRM_COL).setValue(value);
+      updated++;
     }
 
     return json({ ok: true, updated: updated });

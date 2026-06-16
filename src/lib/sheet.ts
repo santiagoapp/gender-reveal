@@ -15,19 +15,46 @@ const API_KEY = process.env.GOOGLE_API_KEY;
 const SHEET_TAB = process.env.SHEET_TAB || "Participación";
 
 // Column indexes (0-based) within the A:G range.
+const COL_NO = 0; // A  (stable per-guest id used for confirmation)
 const COL_NAME = 2; // C
 const COL_SLUG = 6; // G
 
+export type Member = {
+  id: string; // value of column A ("No.") — stable id for a single guest row
+  name: string;
+};
+
 export type Group = {
   slug: string;
-  names: string[];
+  names: string[]; // convenience: just the names, in order
+  members: Member[];
 };
 
 // Local/dev fallback so the project builds & runs without secrets configured.
 const MOCK_GROUPS: Group[] = [
-  { slug: "familia-marina", names: ["Marina", "Orlando", "Marlon"] },
-  { slug: "familia-cesitar", names: ["Cesitar", "Tatiana", "Julieta"] },
-  { slug: "demo", names: ["Invitado de ejemplo"] },
+  {
+    slug: "familia-marina",
+    names: ["Marina", "Orlando", "Marlon"],
+    members: [
+      { id: "1", name: "Marina" },
+      { id: "2", name: "Orlando" },
+      { id: "3", name: "Marlon" },
+    ],
+  },
+  {
+    slug: "familia-cesitar",
+    names: ["Cesitar", "Tatiana", "Julieta"],
+    members: [
+      { id: "6", name: "Cesitar" },
+      { id: "7", name: "Tatiana" },
+      { id: "8", name: "Julieta" },
+    ],
+  },
+  {
+    slug: "demo",
+    names: ["Invitado de ejemplo"],
+    members: [{ id: "0", name: "Invitado de ejemplo" }],
+  },
 ];
 
 export async function getGroups(): Promise<Group[]> {
@@ -56,11 +83,12 @@ export async function getGroups(): Promise<Group[]> {
   const data = (await res.json()) as { values?: string[][] };
   const rows = data.values || [];
 
-  // Preserve first-seen order of slugs while grouping names.
+  // Preserve first-seen order of slugs while grouping members.
   const order: string[] = [];
-  const map = new Map<string, string[]>();
+  const map = new Map<string, Member[]>();
 
   for (const row of rows) {
+    const id = (row[COL_NO] || "").trim();
     const name = (row[COL_NAME] || "").trim();
     const slug = (row[COL_SLUG] || "").trim();
     if (!slug || !name) continue;
@@ -68,10 +96,15 @@ export async function getGroups(): Promise<Group[]> {
       map.set(slug, []);
       order.push(slug);
     }
-    map.get(slug)!.push(name);
+    // Fall back to the name as id if column A is empty, so confirmation
+    // still has something stable to target.
+    map.get(slug)!.push({ id: id || name, name });
   }
 
-  return order.map((slug) => ({ slug, names: map.get(slug)! }));
+  return order.map((slug) => {
+    const members = map.get(slug)!;
+    return { slug, members, names: members.map((m) => m.name) };
+  });
 }
 
 export async function getGroup(slug: string): Promise<Group | undefined> {

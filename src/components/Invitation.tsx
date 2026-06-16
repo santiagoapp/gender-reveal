@@ -1,199 +1,242 @@
 import { config } from "@/lib/config";
+import { asset } from "@/lib/assets";
 import type { Group } from "@/lib/sheet";
-import Countdown from "./Countdown";
-import ConfirmButton from "./ConfirmButton";
-import FloatingDecor from "./FloatingDecor";
-import MusicToggle from "./MusicToggle";
-import MusicPrompt from "./MusicPrompt";
-import HeroBears from "./HeroBears";
+import PlayButton from "./PlayButton";
+import CountdownBox from "./CountdownBox";
+import GroupConfirm from "./GroupConfirm";
 
-function formatDate(iso: string): string {
-  try {
-    return new Intl.DateTimeFormat("es-CO", {
-      weekday: "long",
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-      hour: "numeric",
-      minute: "2-digit",
-    }).format(new Date(iso));
-  } catch {
-    return iso;
-  }
-}
+/* eslint-disable @next/next/no-img-element */
 
-function googleCalendarUrl(): string {
-  const start = new Date(config.eventDateISO);
-  const end = new Date(
-    start.getTime() + config.eventDurationHours * 3600 * 1000
-  );
-  const fmt = (d: Date) =>
-    d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
-  const params = new URLSearchParams({
-    action: "TEMPLATE",
-    text: `${config.event.title} · ${config.event.hosts}`,
-    dates: `${fmt(start)}/${fmt(end)}`,
-    details: config.event.callToAction,
-    location: `${config.event.locationName} ${config.event.locationAddress}`.trim(),
-  });
-  return `https://calendar.google.com/calendar/render?${params.toString()}`;
-}
+const ev = config.event;
 
-export default function Invitation({ group }: { group: Group }) {
-  const ev = config.event;
-  const whatsappUrl = config.whatsappNumber
-    ? `https://wa.me/${config.whatsappNumber}?text=${encodeURIComponent(
-        `¡Hola! Confirmo mi asistencia a ${ev.title} 🧸`
-      )}`
-    : "";
-
+// A single watercolor cut-out, absolutely positioned via `className`.
+function Decor({
+  src,
+  alt = "",
+  className,
+  style,
+}: {
+  src: string;
+  alt?: string;
+  className?: string;
+  style?: React.CSSProperties;
+}) {
   return (
-    <div className="relative">
-      <FloatingDecor />
-      <MusicToggle />
+    <img
+      src={asset(src)}
+      alt={alt}
+      aria-hidden={alt === ""}
+      className={`decor cutout ${className ?? ""}`}
+      style={style}
+    />
+  );
+}
 
-      <div className="relative z-10 mx-auto max-w-2xl px-4 py-10 sm:py-16">
-        {/* Music prompt (only if a track is configured) */}
-        <div className="mb-8">
-          <MusicPrompt />
+// The full watercolor invitation. When `group` is provided (per-slug route),
+// the RSVP section shows the per-person confirmation widget; otherwise it
+// shows the generic contact button.
+export default function Invitation({ group }: { group?: Group }) {
+  return (
+    <div className="relative mx-auto w-full max-w-[30rem] overflow-hidden bg-cream font-body text-cocoa shadow-[0_0_60px_rgba(120,90,60,0.12)]">
+      {/* ───────────────────────── HERO ───────────────────────── */}
+      <section className="relative px-6 pb-4 pt-10 text-center">
+        <Decor src="blue-watercolor-stars.png" className="left-3 top-6 w-24 rotate-[-6deg]" />
+
+        <p className="mx-auto max-w-[20rem] pt-[clamp(3rem,11vw,4.5rem)] leading-snug text-[clamp(1.05rem,4.6vw,1.3rem)]">
+          {config.music.prompt}
+        </p>
+
+        <div className="mt-6 flex justify-center">
+          <PlayButton />
         </div>
 
-        {/* Hero / banner */}
-        <header className="text-center">
-          <p className="text-sm uppercase tracking-[0.3em] text-ink/50">
-            {ev.subtitle} · {ev.hosts}
-          </p>
-          <h1 className="banner-script mt-2 text-5xl sm:text-6xl leading-none">
-            {config.cover.bannerTop}
-          </h1>
-          <div className="my-3">
-            <HeroBears className="max-h-56" />
-          </div>
-          <h2 className="banner-script text-4xl sm:text-5xl leading-none">
-            {config.cover.bannerBottom}
-          </h2>
-          <p className="mt-5 font-display text-2xl sm:text-3xl">
-            <span className="text-boy">💙</span>{" "}
-            <span className="text-ink/80">{ev.question}</span>{" "}
-            <span className="text-girl">💗</span>
-          </p>
-        </header>
+        {/* Banner "Revelación" with the little bird perched at the end */}
+        <div className="relative mx-auto mt-8 w-[94%] max-w-[24rem] -rotate-3">
+          <img src={asset("peach-watercolor-banner.png")} alt="" className="cutout w-full" />
+          <span className="absolute inset-0 flex items-center justify-center pr-[14%]">
+            <span className="font-display text-cocoa drop-shadow-sm text-[clamp(2rem,9.5vw,3.4rem)]">
+              {config.cover.bannerTop}
+            </span>
+          </span>
+          <Decor src="sleeping-baby-angel.png" className="-right-[3%] -top-[8%] w-[27%]" />
+        </div>
 
-        {/* Greeting to the group */}
-        <section className="card mt-10 p-6 sm:p-8 text-center animate-pop">
-          <p className="text-lg text-ink/80">{ev.intro}</p>
-          <div className="mt-5">
-            <p className="text-sm uppercase tracking-widest text-ink/50">
-              Invitación para
-            </p>
-            <ul className="mt-3 flex flex-wrap justify-center gap-2">
-              {group.names.map((name) => (
-                <li
-                  key={name}
-                  className="rounded-full bg-gradient-to-r from-girl/40 to-boy/40 px-4 py-1.5 text-sm font-semibold"
-                >
-                  🧸 {name}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <p className="mt-6 text-lg font-semibold">{ev.callToAction}</p>
-        </section>
+        {/* Two aviator bears in the airplane */}
+        <img
+          src={asset("two-teddy-bears-airplane.png")}
+          alt="Dos ositos aviadores en una avioneta"
+          className="cutout mx-auto -mt-2 w-[88%]"
+        />
+        <Decor src="three-pink-stars.png" className="-left-2 bottom-24 w-20" />
 
-        {/* Countdown */}
-        <section className="mt-12">
-          <h2 className="section-title">Faltan</h2>
-          <div className="mt-5">
-            <Countdown dateISO={config.eventDateISO} />
-          </div>
-        </section>
+        <h2 className="font-display text-cocoa text-[clamp(2.25rem,11vw,3.75rem)]">
+          {config.cover.bannerBottom}
+        </h2>
 
-        {/* Event details */}
-        <section className="card mt-12 p-6 sm:p-8">
-          <h2 className="section-title mb-5">Detalles</h2>
-          <dl className="space-y-4">
-            <Detail label="📅 Fecha" value={formatDate(config.eventDateISO)} />
-            <Detail label="📍 Lugar" value={ev.locationName} />
-            {ev.locationAddress && (
-              <Detail label="🏠 Dirección" value={ev.locationAddress} />
-            )}
-          </dl>
-          <div className="mt-6 flex flex-wrap gap-3">
-            {ev.locationMapsUrl && (
-              <a
-                href={ev.locationMapsUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-full bg-boy/60 px-5 py-2 text-sm font-semibold hover:bg-boy"
-              >
-                📍 Ver en Maps
-              </a>
-            )}
-            <a
-              href={googleCalendarUrl()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-full bg-girl/60 px-5 py-2 text-sm font-semibold hover:bg-girl"
-            >
-              🗓️ Agregar al calendario
-            </a>
-          </div>
-        </section>
+        <p className="mx-auto mt-6 max-w-[22rem] leading-snug text-[clamp(1.05rem,4.6vw,1.3rem)]">
+          {ev.intro}
+        </p>
 
-        {/* Dress code */}
-        {ev.dressCode && (
-          <section className="card mt-8 p-6 sm:p-8 text-center">
-            <h2 className="section-title mb-3">Código de vestimenta</h2>
-            <p className="text-lg">{ev.dressCode}</p>
-            <div className="mt-4 flex justify-center gap-4 text-3xl">
-              <span className="animate-sway">💙</span>
-              <span className="animate-floaty">🧸</span>
-              <span className="animate-sway">💗</span>
+        <p className="mx-auto mt-6 max-w-[24rem] leading-snug text-[clamp(0.98rem,4.2vw,1.2rem)]">
+          <span className="font-semibold">{ev.question}</span> {ev.callToAction}
+        </p>
+
+        <h3 className="mt-7 font-display text-cocoaDark text-[clamp(2.25rem,10vw,3.75rem)]">
+          {ev.hosts}
+        </h3>
+      </section>
+
+      {/* ─────────────── DATE / TIME (pink torn-paper band) ─────────────── */}
+      <section className="relative mt-6">
+        <img src={asset("pink-watercolor-torn-paper-border.png")} alt="" className="block w-full" />
+        <div className="relative -mt-px bg-rosepanel px-6 py-8">
+          <div className="flex items-center justify-between gap-3">
+            <div className="space-y-6 text-white">
+              <div className="flex flex-col items-center text-center">
+                {/* Asset is white-on-black line art with two icons; blend out
+                    the black and crop to a single calendar. */}
+                <div className="h-16 w-16 overflow-hidden">
+                  <img
+                    src={asset("calendar-icons-with-hearts.png")}
+                    alt=""
+                    className="h-16 max-w-none mix-blend-screen"
+                  />
+                </div>
+                <p className="mt-2 font-display leading-tight text-[clamp(1.25rem,5.5vw,1.7rem)]">
+                  {ev.dateLabel}
+                  <br />
+                  {ev.dateValue}
+                </p>
+              </div>
+              <div className="flex flex-col items-center text-center">
+                <div className="h-16 w-[3.2rem] overflow-hidden">
+                  <img
+                    src={asset("two-alarm-clocks-outline.png")}
+                    alt=""
+                    className="h-16 max-w-none mix-blend-screen"
+                  />
+                </div>
+                <p className="mt-2 font-display text-[clamp(1.25rem,5.5vw,1.7rem)]">
+                  {ev.timeValue}
+                </p>
+              </div>
             </div>
-          </section>
+            <img
+              src={asset("aviator-bear-waving-closeup.png")}
+              alt="Osito aviador saludando"
+              className="cutout w-1/2 max-w-[12rem]"
+            />
+          </div>
+        </div>
+        <img
+          src={asset("pink-watercolor-torn-paper-border.png")}
+          alt=""
+          className="block w-full -scale-y-100"
+        />
+      </section>
+
+      {/* ─────────────── COUNTDOWN + LOCATION ─────────────── */}
+      <section className="relative px-6 pb-8 pt-6 text-center">
+        <p className="font-display text-cocoa text-[clamp(1.6rem,7vw,2.25rem)]">
+          {ev.countdownTitle}
+        </p>
+        <div className="mt-4 flex justify-center">
+          <CountdownBox dateISO={config.eventDateISO} />
+        </div>
+
+        <Decor src="three-pink-stars.png" className="right-2 top-28 w-24" />
+        <Decor src="three-blue-stars.png" className="left-1 top-48 w-24" />
+
+        {/* Girl bear waving over a soft blue watercolor splash */}
+        <div className="relative mx-auto mt-6 w-[70%] max-w-[18rem]">
+          <img
+            src={asset("soft-blue-watercolor-circle.png")}
+            alt=""
+            className="absolute inset-0 m-auto w-full scale-125 opacity-90"
+          />
+          <img
+            src={asset("waving-bear-pink-bow.png")}
+            alt="Osita saludando con moño rosa"
+            className="cutout relative w-full"
+          />
+        </div>
+
+        <p className="mt-8 font-display leading-snug text-cocoa text-[clamp(1.25rem,5.5vw,1.7rem)]">
+          {ev.locationIntro}
+          <br />
+          {ev.locationName}
+          <br />
+          {ev.locationAddress}
+          <br />
+          {ev.locationArea}
+        </p>
+
+        {ev.locationMapsUrl && (
+          <a
+            href={ev.locationMapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-pink mt-5"
+          >
+            {ev.locationButton}
+          </a>
+        )}
+        <Decor src="blue-watercolor-star.png" className="-right-1 bottom-2 w-16" />
+      </section>
+
+      {/* ─────────────── GIFTS / DRESS CODE / RSVP ─────────────── */}
+      <section className="relative px-6 pb-16 pt-2 text-center">
+        {/* Aviator bear descending on a parachute, bird perched on top */}
+        <div className="relative float-left mb-2 w-[42%] max-w-[12rem]">
+          <Decor src="cute-yellow-bird.png" className="left-1/2 top-0 w-12 -translate-x-1/2" />
+          <img
+            src={asset("aviator-bear-blue-parachute.png")}
+            alt="Osito aviador en paracaídas"
+            className="cutout w-full pt-6"
+          />
+        </div>
+
+        <div className="space-y-6 pt-6 leading-snug text-[clamp(1.05rem,4.6vw,1.3rem)]">
+          <p className="mx-auto max-w-[16rem]">{ev.giftBoy}</p>
+          <p className="mx-auto max-w-[16rem]">{ev.giftGirl}</p>
+          <p className="mx-auto max-w-[18rem]">
+            <span className="font-semibold">{ev.dressCodeLabel}</span>
+            <br />
+            {ev.dressCode}
+          </p>
+        </div>
+
+        <div className="clear-both" />
+
+        <p className="mx-auto mt-10 max-w-[22rem] leading-snug text-[clamp(1.05rem,4.6vw,1.3rem)]">
+          {ev.note.replace("{deadline}", ev.rsvpDeadline)}
+        </p>
+
+        {/* Per-group confirmation when a group is known; otherwise a contact CTA. */}
+        {group ? (
+          <GroupConfirm group={group} />
+        ) : config.whatsappNumber ? (
+          <a
+            href={`https://wa.me/${config.whatsappNumber}?text=${encodeURIComponent(
+              `¡Hola! Confirmo mi asistencia a la ${ev.title} de ${ev.hosts} 🧸`
+            )}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-pink mt-5"
+          >
+            {ev.rsvpLabel}
+          </a>
+        ) : (
+          <span className="btn-pink mt-5 opacity-90">{ev.rsvpLabel}</span>
         )}
 
-        {/* Gift */}
-        {ev.gift && (
-          <section className="mt-8 text-center text-ink/70">
-            <p>🎁 {ev.gift}</p>
-          </section>
-        )}
+        <Decor src="orange-watercolor-stars.png" className="left-1 bottom-24 w-20" />
+        <Decor src="orange-watercolor-stars.png" className="right-1 bottom-28 w-20 -scale-x-100" />
 
-        {/* Confirmation */}
-        <section className="mt-12 text-center">
-          <h2 className="section-title mb-4">Confirma tu asistencia</h2>
-          <p className="mb-5 text-ink/70">{ev.note}</p>
-          <ConfirmButton slug={group.slug} />
-          {whatsappUrl && (
-            <div className="mt-4">
-              <a
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm text-green-700 underline"
-              >
-                o confírmanos por WhatsApp
-              </a>
-            </div>
-          )}
-        </section>
-
-        <footer className="mt-14 text-center text-xs text-ink/40">
-          Hecho con 💙🧸💗 · {ev.title}
-        </footer>
-      </div>
-    </div>
-  );
-}
-
-function Detail({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="flex flex-col sm:flex-row sm:items-baseline sm:gap-3">
-      <dt className="w-32 shrink-0 text-sm font-semibold uppercase tracking-wide text-ink/50">
-        {label}
-      </dt>
-      <dd className="text-lg">{value}</dd>
+        {/* Pink cloud + girl bear peeking from the bottom corner */}
+        <Decor src="pink-watercolor-cloud.png" className="-left-4 bottom-0 w-28" />
+        <Decor src="girl-teddy-bear-bow.png" className="-right-2 -bottom-2 w-28" />
+      </section>
     </div>
   );
 }

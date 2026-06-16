@@ -85,10 +85,15 @@ export const config = {
   whatsappNumber: "",
 
   confirm: {
+    title: "Confirma tu asistencia",
+    selectHint: "Marca quiénes asistirán:",
+    selectAll: "Seleccionar todos",
     idle: "Confirmar asistencia",
     loading: "Confirmando…",
-    done: "¡Asistencia confirmada! 🎉",
+    done: "¡Asistencia confirmada! 🎉 Gracias.",
     error: "Hubo un problema. Intenta de nuevo.",
+    retry: "Reintentar",
+    noneSelected: "Marca al menos una persona.",
   },
 
   appsScriptUrl: process.env.NEXT_PUBLIC_APPS_SCRIPT_URL || "",
