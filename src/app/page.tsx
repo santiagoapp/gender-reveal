@@ -34,12 +34,12 @@ function Decor({
 export default function Home() {
   return (
     <CoverGate>
-      <div className="relative mx-auto w-full max-w-[460px] overflow-hidden bg-cream font-body text-cocoa">
+      <div className="relative mx-auto w-full max-w-[30rem] overflow-hidden bg-cream font-body text-cocoa shadow-[0_0_60px_rgba(120,90,60,0.12)]">
       {/* ───────────────────────── HERO ───────────────────────── */}
       <section className="relative px-6 pb-4 pt-10 text-center">
         <Decor src="blue-watercolor-stars.png" className="left-3 top-6 w-24 rotate-[-6deg]" />
 
-        <p className="mx-auto max-w-[18rem] pt-16 text-xl leading-snug">
+        <p className="mx-auto max-w-[20rem] pt-[clamp(3rem,11vw,4.5rem)] leading-snug text-[clamp(1.05rem,4.6vw,1.3rem)]">
           {config.music.prompt}
         </p>
 
@@ -55,7 +55,7 @@ export default function Home() {
             className="cutout w-full"
           />
           <span className="absolute inset-0 flex items-center justify-center">
-            <span className="font-display text-4xl font-semibold italic text-cocoa drop-shadow-sm sm:text-5xl">
+            <span className="font-display font-semibold italic text-cocoa drop-shadow-sm text-[clamp(1.9rem,8vw,3.25rem)]">
               Revelación
             </span>
           </span>
@@ -73,19 +73,19 @@ export default function Home() {
         />
         <Decor src="three-pink-stars.png" className="-left-2 bottom-24 w-20" />
 
-        <h2 className="font-display text-5xl font-semibold italic text-cocoa">
+        <h2 className="font-display font-semibold italic text-cocoa text-[clamp(2.25rem,10vw,3.5rem)]">
           de Género
         </h2>
 
-        <p className="mx-auto mt-6 max-w-[20rem] text-xl leading-snug">
+        <p className="mx-auto mt-6 max-w-[22rem] leading-snug text-[clamp(1.05rem,4.6vw,1.3rem)]">
           {ev.intro}
         </p>
 
-        <p className="mx-auto mt-6 max-w-[22rem] text-lg leading-snug">
+        <p className="mx-auto mt-6 max-w-[24rem] leading-snug text-[clamp(0.98rem,4.2vw,1.2rem)]">
           <span className="font-semibold">{ev.question}</span> {ev.callToAction}
         </p>
 
-        <h3 className="mt-7 font-display text-5xl font-bold italic text-cocoaDark">
+        <h3 className="mt-7 font-display font-bold italic text-cocoaDark text-[clamp(2.25rem,10vw,3.75rem)]">
           {ev.hosts}
         </h3>
       </section>
@@ -110,7 +110,7 @@ export default function Home() {
                     className="h-16 max-w-none mix-blend-screen"
                   />
                 </div>
-                <p className="mt-2 font-display text-2xl font-bold italic leading-tight">
+                <p className="mt-2 font-display font-bold italic leading-tight text-[clamp(1.25rem,5.5vw,1.7rem)]">
                   {ev.dateLabel}
                   <br />
                   {ev.dateValue}
@@ -124,7 +124,7 @@ export default function Home() {
                     className="h-16 max-w-none mix-blend-screen"
                   />
                 </div>
-                <p className="mt-2 font-display text-2xl font-bold italic">
+                <p className="mt-2 font-display font-bold italic text-[clamp(1.25rem,5.5vw,1.7rem)]">
                   {ev.timeValue}
                 </p>
               </div>
@@ -145,7 +145,7 @@ export default function Home() {
 
       {/* ─────────────── COUNTDOWN + LOCATION ─────────────── */}
       <section className="relative px-6 pb-8 pt-6 text-center">
-        <p className="font-display text-3xl font-semibold italic text-cocoa">
+        <p className="font-display font-semibold italic text-cocoa text-[clamp(1.6rem,7vw,2.25rem)]">
           Sólo Faltan:
         </p>
         <div className="mt-4 flex justify-center">
@@ -169,7 +169,7 @@ export default function Home() {
           />
         </div>
 
-        <p className="mt-8 font-display text-2xl font-semibold italic leading-snug text-cocoa">
+        <p className="mt-8 font-display font-semibold italic leading-snug text-cocoa text-[clamp(1.25rem,5.5vw,1.7rem)]">
           Te esperamos en:
           <br />
           {ev.locationName}
@@ -207,7 +207,7 @@ export default function Home() {
           />
         </div>
 
-        <div className="space-y-6 pt-6 text-xl leading-snug">
+        <div className="space-y-6 pt-6 leading-snug text-[clamp(1.05rem,4.6vw,1.3rem)]">
           <p className="mx-auto max-w-[16rem]">{ev.giftBoy}</p>
           <p className="mx-auto max-w-[16rem]">{ev.giftGirl}</p>
           <p className="mx-auto max-w-[18rem]">
@@ -219,7 +219,7 @@ export default function Home() {
 
         <div className="clear-both" />
 
-        <p className="mx-auto mt-10 max-w-[20rem] text-xl leading-snug">
+        <p className="mx-auto mt-10 max-w-[22rem] leading-snug text-[clamp(1.05rem,4.6vw,1.3rem)]">
           {ev.note}
         </p>
 

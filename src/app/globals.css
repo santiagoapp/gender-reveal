@@ -62,10 +62,15 @@ body {
 
 /* ── Envelope cover ── */
 .cover {
-  @apply fixed inset-0 z-50 flex flex-col items-center justify-center gap-6 px-6 text-center;
+  @apply fixed inset-0 z-50 flex flex-col items-center justify-start overflow-y-auto px-5 py-6 text-center;
   transition:
     opacity 0.7s ease 0.45s,
     transform 0.7s ease 0.45s;
+}
+/* Inner column is vertically centered but can scroll on short screens. */
+.cover__inner {
+  @apply my-auto flex w-full max-w-[min(26rem,92vw)] flex-col items-center;
+  gap: clamp(0.25rem, 2vh, 1rem);
 }
 .cover--opening {
   opacity: 0;
@@ -73,74 +78,49 @@ body {
   pointer-events: none;
 }
 
-.envelope {
+/* Real kraft-paper envelope (PNG) with arched label + gold wax seal. */
+.env {
   position: relative;
-  width: min(20rem, 80vw);
-  height: min(12rem, 48vw);
-  perspective: 1100px;
+  display: block;
+  width: clamp(15rem, 78vw, 21rem);
+  cursor: pointer;
 }
-.envelope__body {
-  position: absolute;
-  inset: 0;
-  border-radius: 0 0 14px 14px;
-  background: linear-gradient(#bb875d, #a36e47);
-  box-shadow: 0 18px 40px rgba(90, 60, 35, 0.35);
+.env__paper {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 18px 24px rgba(90, 60, 35, 0.28));
 }
-/* Diagonal side folds for a paper-envelope look */
-.envelope__body::before,
-.envelope__body::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  width: 52%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.06);
-}
-.envelope__body::before {
-  left: 0;
-  clip-path: polygon(0 0, 100% 100%, 0 100%);
-}
-.envelope__body::after {
-  right: 0;
-  clip-path: polygon(100% 0, 100% 100%, 0 100%);
-}
-/* Closed flap: downward triangle covering the top half */
-.envelope__flap {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 0;
-  border-left: min(10rem, 40vw) solid transparent;
-  border-right: min(10rem, 40vw) solid transparent;
-  border-top: min(6.5rem, 26vw) solid #a87750;
-  transform-origin: top center;
-  transition: transform 0.85s ease;
-  z-index: 3;
-}
-.cover--opening .envelope__flap {
-  transform: rotateX(180deg);
-  z-index: 1;
-}
-
-.seal {
+/* "VER INVITACIÓN" arched on the flap, above the seal. */
+.env__arc {
   position: absolute;
   left: 50%;
-  top: 56%;
+  top: 40%;
+  width: 52%;
+  transform: translateX(-50%);
+  fill: #fbf3e8;
+  filter: drop-shadow(0 1px 1px rgba(74, 46, 22, 0.6));
+  pointer-events: none;
+}
+.env__seal {
+  position: absolute;
+  left: 50%;
+  top: 51%;
+  width: 27%;
   transform: translate(-50%, -50%);
-  z-index: 4;
-  cursor: pointer;
+  filter: drop-shadow(0 4px 6px rgba(70, 44, 20, 0.3));
+  animation: floaty 3.5s ease-in-out infinite;
+}
+.env:hover .env__seal {
+  filter: drop-shadow(0 6px 9px rgba(70, 44, 20, 0.34)) brightness(1.05);
+}
+/* On open: the seal lifts away and fades. */
+.cover--opening .env__seal {
+  transform: translate(-50%, -240%) scale(1.35);
+  opacity: 0;
   transition:
     transform 0.8s ease,
     opacity 0.8s ease;
-  animation: floaty 3.5s ease-in-out infinite;
-}
-.seal:hover {
-  filter: brightness(1.05);
-}
-.cover--opening .seal {
-  transform: translate(-50%, -190%) scale(1.4);
-  opacity: 0;
   animation: none;
 }
 
