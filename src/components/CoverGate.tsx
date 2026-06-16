@@ -49,22 +49,22 @@ export default function CoverGate({
           aria-hidden={opened}
         >
           <div className="cover__inner">
-            {/* Banner "Revelación" with the perched bird */}
-            <div className="relative w-[88%] max-w-[22rem]">
+            {/* Banner "Revelación" with the perched bird (slightly tilted) */}
+            <div className="relative w-[92%] max-w-[23rem] -rotate-3">
               <img
                 src={asset("peach-watercolor-banner.png")}
                 alt=""
                 className="cutout w-full"
               />
-              <span className="absolute inset-0 flex items-center justify-center">
-                <span className="font-display font-semibold italic text-cocoa drop-shadow-sm text-[clamp(1.6rem,7vw,2.6rem)]">
+              <span className="absolute inset-0 flex items-center justify-center pr-[14%]">
+                <span className="font-display font-bold italic text-cocoa drop-shadow-sm text-[clamp(2rem,9.5vw,3.4rem)]">
                   {config.cover.bannerTop}
                 </span>
               </span>
               <img
-                src={asset("yellow-watercolor-bird.png")}
+                src={asset("sleeping-baby-angel.png")}
                 alt=""
-                className="cutout absolute -right-1 -top-[14%] w-[22%] max-w-[5rem]"
+                className="cutout absolute -right-[3%] -top-[8%] w-[27%] max-w-[6.5rem]"
               />
             </div>
 
@@ -72,10 +72,10 @@ export default function CoverGate({
             <img
               src={asset("two-teddy-bears-airplane.png")}
               alt="Dos ositos aviadores en una avioneta"
-              className="cutout w-[78%] max-w-[19rem]"
+              className="cutout -mt-[4%] w-[84%] max-w-[21rem]"
             />
 
-            <h2 className="font-display font-semibold italic text-cocoa text-[clamp(1.9rem,8vw,3rem)]">
+            <h2 className="-mt-[2%] font-display font-bold italic text-cocoa text-[clamp(2.25rem,11vw,3.75rem)]">
               {config.cover.bannerBottom}
             </h2>
 
@@ -83,11 +83,11 @@ export default function CoverGate({
             <button
               type="button"
               onClick={open}
-              className="env mt-2 focus:outline-none"
+              className="env -mt-[2%] focus:outline-none"
               aria-label={config.cover.sealText}
             >
               <img
-                src={asset("kraft-envelope.png")}
+                src={asset("kraft-envelope-alt.png")}
                 alt=""
                 className="env__paper"
               />
@@ -96,9 +96,9 @@ export default function CoverGate({
                   <path id="env-arc" d="M20 70 A 112 112 0 0 1 180 70" fill="none" />
                 </defs>
                 <text
-                  fontSize="18"
+                  fontSize="20"
                   fontWeight="700"
-                  letterSpacing="1.2"
+                  letterSpacing="1.4"
                   style={{ fontFamily: "Quicksand, sans-serif" }}
                 >
                   <textPath href="#env-arc" startOffset="50%" textAnchor="middle">

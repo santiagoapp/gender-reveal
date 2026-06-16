@@ -48,20 +48,20 @@ export default function Home() {
         </div>
 
         {/* Banner "Revelación" with the little bird perched at the end */}
-        <div className="relative mx-auto mt-8 w-full max-w-[24rem]">
+        <div className="relative mx-auto mt-8 w-[94%] max-w-[24rem] -rotate-3">
           <img
             src={asset("peach-watercolor-banner.png")}
             alt=""
             className="cutout w-full"
           />
-          <span className="absolute inset-0 flex items-center justify-center">
-            <span className="font-display font-semibold italic text-cocoa drop-shadow-sm text-[clamp(1.9rem,8vw,3.25rem)]">
+          <span className="absolute inset-0 flex items-center justify-center pr-[14%]">
+            <span className="font-display font-bold italic text-cocoa drop-shadow-sm text-[clamp(2rem,9.5vw,3.4rem)]">
               Revelación
             </span>
           </span>
           <Decor
-            src="yellow-watercolor-bird.png"
-            className="-right-2 -top-6 w-20"
+            src="sleeping-baby-angel.png"
+            className="-right-[3%] -top-[8%] w-[27%]"
           />
         </div>
 
@@ -73,7 +73,7 @@ export default function Home() {
         />
         <Decor src="three-pink-stars.png" className="-left-2 bottom-24 w-20" />
 
-        <h2 className="font-display font-semibold italic text-cocoa text-[clamp(2.25rem,10vw,3.5rem)]">
+        <h2 className="font-display font-bold italic text-cocoa text-[clamp(2.25rem,11vw,3.75rem)]">
           de Género
         </h2>
 
