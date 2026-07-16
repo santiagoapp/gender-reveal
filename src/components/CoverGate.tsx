@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { config } from "@/lib/config";
 import { asset } from "@/lib/assets";
-import { useMusic } from "./MusicProvider";
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -16,7 +15,6 @@ export default function CoverGate({
 }) {
   const [opening, setOpening] = useState(false);
   const [opened, setOpened] = useState(false);
-  const music = useMusic();
 
   // Lock page scroll while the cover is up.
   useEffect(() => {
@@ -34,8 +32,7 @@ export default function CoverGate({
   function open() {
     if (opening) return;
     setOpening(true);
-    // The click is a user gesture, so autoplay is allowed here.
-    if (music?.enabled) music.play();
+    // Music starts only when the guest taps the play button, not on open.
     window.setTimeout(() => setOpened(true), 1100);
   }
 

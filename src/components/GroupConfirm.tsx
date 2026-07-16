@@ -55,6 +55,16 @@ export default function GroupConfirm({ group }: { group: Group }) {
     lines.join("\n")
   )}`;
 
+  // Decline ("can't attend") — label and message depend on group size.
+  const many = group.members.length > 1;
+  const declineLabel = many ? c.declineMany : c.declineOne;
+  const declineMsg = (many ? c.waDeclineMany : c.waDeclineOne)
+    .replace("{group}", group.title)
+    .replace("{event}", config.event.title);
+  const declineHref = `https://wa.me/${config.whatsappNumber}?text=${encodeURIComponent(
+    declineMsg
+  )}`;
+
   return (
     <div className="relative z-10 mx-auto mt-6 w-full max-w-[20rem] text-left">
       <p className="text-center font-display text-cocoa text-[clamp(1.25rem,5.5vw,1.6rem)]">
@@ -90,22 +100,33 @@ export default function GroupConfirm({ group }: { group: Group }) {
         </button>
       )}
 
-      <div className="relative mt-5 flex flex-col items-center">
+      <div className="relative mt-5 flex flex-col items-stretch gap-3">
         {chosen.length > 0 ? (
           <a
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-pink animate-cta-glow"
+            className="btn-pink animate-cta-glow w-full"
           >
             {c.idle}
           </a>
         ) : (
-          <span className="btn-pink opacity-50">{c.idle}</span>
+          <span className="btn-pink w-full opacity-50">{c.idle}</span>
         )}
+
+        {/* Secondary decline action (warning variant). */}
+        <a
+          href={declineHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-warning w-full"
+        >
+          {declineLabel}
+        </a>
+
         {/* Absolute so showing/hiding the hint never changes the widget height. */}
         {chosen.length === 0 && (
-          <p className="absolute top-full mt-2 text-xs text-cocoa/60">
+          <p className="absolute inset-x-0 top-full mt-2 text-center text-xs text-cocoa/60">
             {c.noneSelected}
           </p>
         )}

@@ -105,6 +105,14 @@ export const config = {
     waAttending: "Asistirán:",
     waNotAttending: "No podrán asistir:",
     waClosing: "¡Nos vemos!",
+    // Botón secundario (variante warning) para declinar. Etiqueta y mensaje
+    // cambian según el tamaño del grupo (1 persona vs. varias).
+    declineOne: "No podré asistir",
+    declineMany: "No podremos asistir",
+    waDeclineOne:
+      "¡Hola! Soy *{group}*. Lamento avisar que no podré asistir a la *{event}*. ¡Muchas gracias por la invitación!",
+    waDeclineMany:
+      "¡Hola! Somos *{group}*. Lamentamos avisar que no podremos asistir a la *{event}*. ¡Muchas gracias por la invitación!",
   },
 
   basePath: process.env.NEXT_PUBLIC_BASE_PATH || "",
