@@ -32,10 +32,10 @@ export const config = {
 
     // Ubicación.
     locationIntro: "Te esperamos en:",
-    locationName: "Salón de Eventos Villa Isabella",
-    locationAddress: "Calle 31 # 23-622",
-    locationArea: "Barrio Acacías Norte",
-    locationMapsUrl: "https://maps.google.com/?q=Salón+de+Eventos+Villa+Isabella+Acacías",
+    locationName: "Parque Zaragoza",
+    locationAddress: "Diagonal 84 # 76-34",
+    locationArea: "Barrio La Española",
+    locationMapsUrl: "https://share.google/DoLfUBJWWMGWC7Wa7",
     locationButton: "Ver ubicación",
 
     // Regalos / código de vestimenta.
@@ -48,6 +48,8 @@ export const config = {
     rsvpDeadline: "26 de julio",
     note: "Para organizar todo con amor, agradecemos que nos confirmes tu asistencia hasta el {deadline}.",
     rsvpLabel: "CON LA MAMÁ",
+    // Prefijo del saludo personalizado por grupo (portada e invitación).
+    guestLabel: "Para:",
     // Cierre sobre la franja azul al final de la invitación.
     closingLine: "Tu presencia hará este momento aún más especial!",
     closingHighlight: "¡No faltes!",
@@ -85,22 +87,26 @@ export const config = {
 
   // WhatsApp para dudas / confirmar por chat (opcional). Solo dígitos con
   // código de país, p. ej. "573001234567". Vacío = oculto.
-  whatsappNumber: "",
+  whatsappNumber: "573228250788",
 
+  // El botón "Confirmar asistencia" abre WhatsApp con un mensaje armado con
+  // estas piezas; {group} y {event} se reemplazan al renderizar y las
+  // personas marcadas se listan con viñetas (los *asteriscos* son negrita).
   confirm: {
     title: "Confirma tu asistencia",
     selectHint: "Marca quiénes asistirán:",
     selectAll: "Seleccionar todos",
     idle: "Confirmar asistencia",
-    loading: "Confirmando…",
-    done: "¡Asistencia confirmada! 🎉 Gracias.",
-    error: "Hubo un problema. Intenta de nuevo.",
-    retry: "Reintentar",
     noneSelected: "Marca al menos una persona.",
+    // Sin emojis: la página intermedia de wa.me los corrompe (aparecen como
+    // "�"), así que el mensaje usa solo texto y viñetas seguras.
+    waGreeting: "¡Hola! Somos *{group}*.",
+    waIntro: "Con mucha alegría confirmamos nuestra asistencia a la *{event}*.",
+    waAttending: "Asistirán:",
+    waNotAttending: "No podrán asistir:",
+    waClosing: "¡Nos vemos!",
   },
 
-  appsScriptUrl: process.env.NEXT_PUBLIC_APPS_SCRIPT_URL || "",
-  confirmToken: process.env.NEXT_PUBLIC_CONFIRM_TOKEN || "",
   basePath: process.env.NEXT_PUBLIC_BASE_PATH || "",
 };
 

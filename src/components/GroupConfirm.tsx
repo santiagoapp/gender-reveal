@@ -4,20 +4,17 @@ import { useState } from "react";
 import { config } from "@/lib/config";
 import type { Group } from "@/lib/groups";
 
-type Status = "idle" | "loading" | "done" | "error";
-
 // Per-group confirmation widget. Lists every member of the group with a
-// checkbox (all preselected). The guest can confirm everyone or pick only
-// some, then submit. The POST hits the Apps Script web app, which writes
-// "Confirmado" / "No asiste" per person into the public Google Sheet.
+// checkbox (all preselected). The confirm button is a WhatsApp link with a
+// prefilled message naming the group and the selected guests — confirmation
+// happens in the chat, no backend or tokens involved.
 export default function GroupConfirm({ group }: { group: Group }) {
   const [selected, setSelected] = useState<Record<string, boolean>>(
     () => Object.fromEntries(group.members.map((m) => [m.id, true]))
   );
-  const [status, setStatus] = useState<Status>("idle");
 
   const ids = group.members.map((m) => m.id);
-  const chosen = ids.filter((id) => selected[id]);
+  const chosen = group.members.filter((m) => selected[m.id]);
   const allChecked = chosen.length === ids.length;
 
   function toggle(id: string) {
@@ -28,60 +25,38 @@ export default function GroupConfirm({ group }: { group: Group }) {
     setSelected(Object.fromEntries(ids.map((id) => [id, next])));
   }
 
-  async function submit() {
-    if (status === "loading" || status === "done") return;
-    if (chosen.length === 0) return;
-    setStatus("loading");
-
-    if (!config.appsScriptUrl) {
-      console.warn("NEXT_PUBLIC_APPS_SCRIPT_URL no configurado.");
-      setStatus("error");
-      return;
-    }
-
-    try {
-      // text/plain avoids a CORS preflight (Apps Script can't answer OPTIONS).
-      const res = await fetch(config.appsScriptUrl, {
-        method: "POST",
-        headers: { "Content-Type": "text/plain;charset=utf-8" },
-        body: JSON.stringify({
-          slug: group.slug,
-          token: config.confirmToken,
-          confirmed: chosen, // ids (column A "No.") of attending guests
-        }),
-        redirect: "follow",
-      });
-      const data = await res.json().catch(() => null);
-      if (data && data.ok === false) {
-        console.warn("Apps Script:", data.error);
-        setStatus("error");
-      } else {
-        // ok:true, or response unreadable due to CORS but request likely sent.
-        setStatus("done");
-      }
-    } catch (err) {
-      console.error(err);
-      setStatus("error");
-    }
-  }
-
   const c = config.confirm;
 
-  if (status === "done") {
-    return (
-      <div className="mx-auto mt-6 max-w-[20rem] rounded-2xl bg-bubblegum/20 px-5 py-5 text-center">
-        <p className="font-display text-cocoa text-[clamp(1.25rem,5.5vw,1.6rem)]">
-          {c.done}
-        </p>
-        <p className="mt-2 text-sm text-cocoa/70">
-          {chosen.length}/{ids.length}
-        </p>
-      </div>
-    );
+  // Multi-line WhatsApp message listing who attends (and who doesn't):
+  //   ¡Hola! 👋 Somos *Familia Ramirez Piamba*.
+  //   Con mucha alegría confirmamos nuestra asistencia a la *Revelación de Género* 🧸✈️
+  //
+  //   ✅ Asistirán:
+  //   • Tío Arturo
+  //   • Tía Heidy
+  //
+  //   🚫 No podrán asistir:
+  //   • Fabian
+  //
+  //   ¡Nos vemos! 💙💗
+  const notChosen = group.members.filter((m) => !selected[m.id]);
+  const lines = [
+    c.waGreeting.replace("{group}", group.title),
+    c.waIntro.replace("{event}", config.event.title),
+    "",
+    c.waAttending,
+    ...chosen.map((m) => `• ${m.name}`),
+  ];
+  if (notChosen.length > 0) {
+    lines.push("", c.waNotAttending, ...notChosen.map((m) => `• ${m.name}`));
   }
+  lines.push("", c.waClosing);
+  const href = `https://wa.me/${config.whatsappNumber}?text=${encodeURIComponent(
+    lines.join("\n")
+  )}`;
 
   return (
-    <div className="mx-auto mt-6 w-full max-w-[20rem] text-left">
+    <div className="relative z-10 mx-auto mt-6 w-full max-w-[20rem] text-left">
       <p className="text-center font-display text-cocoa text-[clamp(1.25rem,5.5vw,1.6rem)]">
         {c.title}
       </p>
@@ -115,26 +90,24 @@ export default function GroupConfirm({ group }: { group: Group }) {
         </button>
       )}
 
-      <div className="mt-5 flex flex-col items-center">
-        <button
-          type="button"
-          onClick={submit}
-          disabled={status === "loading" || chosen.length === 0}
-          className="btn-pink disabled:opacity-50"
-        >
-          {status === "loading" ? c.loading : c.idle}
-        </button>
-        {chosen.length === 0 && (
-          <p className="mt-2 text-xs text-cocoa/60">{c.noneSelected}</p>
-        )}
-        {status === "error" && (
-          <button
-            type="button"
-            onClick={() => setStatus("idle")}
-            className="mt-2 text-sm text-cocoa/70 underline"
+      <div className="relative mt-5 flex flex-col items-center">
+        {chosen.length > 0 ? (
+          <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-pink"
           >
-            {c.retry}
-          </button>
+            {c.idle}
+          </a>
+        ) : (
+          <span className="btn-pink opacity-50">{c.idle}</span>
+        )}
+        {/* Absolute so showing/hiding the hint never changes the widget height. */}
+        {chosen.length === 0 && (
+          <p className="absolute top-full mt-2 text-xs text-cocoa/60">
+            {c.noneSelected}
+          </p>
         )}
       </div>
     </div>

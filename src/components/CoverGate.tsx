@@ -8,8 +8,10 @@ import { useMusic } from "./MusicProvider";
 /* eslint-disable @next/next/no-img-element */
 
 export default function CoverGate({
+  guestTitle,
   children,
 }: {
+  guestTitle?: string;
   children: React.ReactNode;
 }) {
   const [opening, setOpening] = useState(false);
@@ -49,6 +51,13 @@ export default function CoverGate({
           aria-hidden={opened}
         >
           <div className="cover__inner">
+            {/* Per-group greeting, e.g. "Para: Familia Ramirez Piamba" */}
+            {guestTitle && (
+              <p className="cover__for font-display text-cocoaDark drop-shadow-sm">
+                {config.event.guestLabel} {guestTitle}
+              </p>
+            )}
+
             {/* Banner "Revelación" with the perched bird (slightly tilted) */}
             <div className="cover__banner relative">
               <img

@@ -19,7 +19,7 @@ export default async function GroupPage({
   const group = getGroup(slug);
   if (!group) notFound();
   return (
-    <CoverGate>
+    <CoverGate guestTitle={group.title}>
       <Invitation group={group} />
     </CoverGate>
   );

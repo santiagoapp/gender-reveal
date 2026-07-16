@@ -32,7 +32,8 @@ body {
 }
 
 /* Plain woven-canvas texture (no watercolor glows) for the invitation body.
-   Matches the reference: texture at ~34% opacity over pure white. */
+   Matches the reference: texture at ~34% opacity over pure white.
+   `isolation` traps the negative-z decorations above this background. */
 .bg-canvas {
   background-color: #ffffff;
   background-image:
@@ -40,6 +41,7 @@ body {
     url("../../public/assets/cream-canvas-texture-background.jpg");
   background-size: auto, 48rem auto;
   background-repeat: repeat, repeat;
+  isolation: isolate;
 }
 
 /* Continuous dusty-rose watercolor fill for the date/time band — a mirrored
@@ -82,8 +84,16 @@ body {
 }
 
 /* ── Watercolor decorations float gently ── */
-.decor {
-  @apply pointer-events-none absolute select-none;
+/* Subtle, and behind the invitation text by default (negative z, trapped
+   above the texture by .bg-canvas' isolation). Declared in the components
+   layer so a `z-*` utility on the element still wins — used for decorations
+   that intentionally perch on top of an image (banner bird, closing cloud). */
+@layer components {
+  .decor {
+    @apply pointer-events-none absolute select-none;
+    z-index: -1;
+    opacity: 0.6;
+  }
 }
 
 /* Soft drop shadow that matches the watercolor cut-outs */
@@ -114,6 +124,10 @@ body {
 }
 .cover__title {
   font-size: clamp(2rem, min(11vw, 6.5svh), 3.75rem);
+}
+/* Per-group greeting on the cover — svh-capped so it never causes scroll. */
+.cover__for {
+  font-size: clamp(1.15rem, min(5.5vw, 3.5svh), 1.6rem);
 }
 .cover--opening {
   opacity: 0;

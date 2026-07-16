@@ -42,7 +42,18 @@ export default function Invitation({ group }: { group?: Group }) {
       <section className="relative px-6 pb-4 pt-10 text-center">
         <Decor src="blue-watercolor-stars.png" className="left-3 top-6 w-24 rotate-[-6deg]" />
 
-        <p className="mx-auto max-w-[20rem] pt-[clamp(3rem,11vw,4.5rem)] leading-snug text-[clamp(1.05rem,4.6vw,1.3rem)]">
+        {/* Per-group greeting, e.g. "Para: Familia Ramirez Piamba" */}
+        {group && (
+          <h1 className="pt-[clamp(3rem,11vw,4.5rem)] font-display text-cocoaDark text-[clamp(1.5rem,6.5vw,2rem)]">
+            {ev.guestLabel} {group.title}
+          </h1>
+        )}
+
+        <p
+          className={`mx-auto max-w-[20rem] leading-snug text-[clamp(1.05rem,4.6vw,1.3rem)] ${
+            group ? "pt-5" : "pt-[clamp(3rem,11vw,4.5rem)]"
+          }`}
+        >
           {config.music.prompt}
         </p>
 
@@ -58,7 +69,7 @@ export default function Invitation({ group }: { group?: Group }) {
               {config.cover.bannerTop}
             </span>
           </span>
-          <Decor src="sleeping-baby-angel.png" className="-right-[3%] -top-[8%] w-[27%]" />
+          <Decor src="sleeping-baby-angel.png" className="-right-[3%] -top-[8%] z-10 w-[27%]" />
         </div>
 
         {/* Two aviator bears in the airplane */}
@@ -194,7 +205,7 @@ export default function Invitation({ group }: { group?: Group }) {
       <section className="relative px-6 pb-16 pt-2 text-center">
         {/* Aviator bear descending on a parachute, bird perched on top */}
         <div className="relative float-left mb-2 w-[42%] max-w-[12rem]">
-          <Decor src="cute-yellow-bird.png" className="left-1/2 top-0 w-12 -translate-x-1/2" />
+          <Decor src="cute-yellow-bird.png" className="left-1/2 top-0 z-10 w-12 -translate-x-1/2" />
           <img
             src={asset("aviator-bear-blue-parachute.png")}
             alt="Osito aviador en paracaídas"
