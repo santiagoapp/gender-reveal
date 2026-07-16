@@ -70,34 +70,39 @@ export default function GroupConfirm({ group }: { group: Group }) {
       <p className="text-center font-display text-cocoa text-[clamp(1.25rem,5.5vw,1.6rem)]">
         {c.title}
       </p>
-      <p className="mt-1 text-center text-sm text-cocoa/70">{c.selectHint}</p>
 
-      <ul className="mt-4 space-y-2">
-        {group.members.map((m) => (
-          <li key={m.id}>
-            <label className="flex cursor-pointer items-center gap-3 rounded-xl bg-white/70 px-4 py-2.5 shadow-sm ring-1 ring-cocoa/10 transition hover:bg-white">
-              <input
-                type="checkbox"
-                checked={!!selected[m.id]}
-                onChange={() => toggle(m.id)}
-                className="h-5 w-5 shrink-0 accent-bubblegum"
-              />
-              <span className="text-cocoa text-[clamp(1rem,4.4vw,1.2rem)]">
-                {m.name}
-              </span>
-            </label>
-          </li>
-        ))}
-      </ul>
+      {/* Checkbox list only makes sense for groups; a single guest just picks
+          a button below. */}
+      {many && (
+        <>
+          <p className="mt-1 text-center text-sm text-cocoa/70">{c.selectHint}</p>
 
-      {group.members.length > 1 && (
-        <button
-          type="button"
-          onClick={toggleAll}
-          className="mt-3 text-sm font-semibold text-cocoa/70 underline underline-offset-2"
-        >
-          {c.selectAll}
-        </button>
+          <ul className="mt-4 space-y-2">
+            {group.members.map((m) => (
+              <li key={m.id}>
+                <label className="flex cursor-pointer items-center gap-3 rounded-xl bg-white/70 px-4 py-2.5 shadow-sm ring-1 ring-cocoa/10 transition hover:bg-white">
+                  <input
+                    type="checkbox"
+                    checked={!!selected[m.id]}
+                    onChange={() => toggle(m.id)}
+                    className="h-5 w-5 shrink-0 accent-bubblegum"
+                  />
+                  <span className="text-cocoa text-[clamp(1rem,4.4vw,1.2rem)]">
+                    {m.name}
+                  </span>
+                </label>
+              </li>
+            ))}
+          </ul>
+
+          <button
+            type="button"
+            onClick={toggleAll}
+            className="mt-3 text-sm font-semibold text-cocoa/70 underline underline-offset-2"
+          >
+            {c.selectAll}
+          </button>
+        </>
       )}
 
       <div className="relative mt-5 flex flex-col items-stretch gap-3">
