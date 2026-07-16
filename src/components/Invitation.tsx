@@ -40,7 +40,7 @@ export default function Invitation({ group }: { group?: Group }) {
     <div className="bg-canvas relative mx-auto w-full max-w-[30rem] overflow-hidden font-body text-cocoa shadow-[0_0_60px_rgba(120,90,60,0.12)]">
       {/* ───────────────────────── HERO ───────────────────────── */}
       <section className="relative px-6 pb-4 pt-10 text-center">
-        <Decor src="blue-watercolor-stars.png" className="left-3 top-6 w-24 rotate-[-6deg]" />
+        <Decor src="blue-watercolor-stars.webp" className="left-3 top-6 w-24 rotate-[-6deg]" />
 
         {/* Per-group greeting, e.g. "Para: Familia Ramirez Piamba" */}
         {group && (
@@ -63,22 +63,22 @@ export default function Invitation({ group }: { group?: Group }) {
 
         {/* Banner "Revelación" with the little bird perched at the end */}
         <div className="relative mx-auto mt-8 w-[94%] max-w-[24rem]">
-          <img src={asset("peach-watercolor-banner.png")} alt="" className="cutout w-full" />
+          <img src={asset("peach-watercolor-banner.webp")} alt="" className="cutout w-full" />
           <span className="absolute inset-0 flex items-center justify-center pr-[14%]">
             <span className="font-display text-cocoa drop-shadow-sm text-[clamp(2rem,9.5vw,3.4rem)]">
               {config.cover.bannerTop}
             </span>
           </span>
-          <Decor src="sleeping-baby-angel.png" className="-right-[3%] -top-[8%] z-10 w-[27%]" />
+          <Decor src="sleeping-baby-angel.webp" className="-right-[3%] -top-[8%] z-10 w-[27%]" />
         </div>
 
         {/* Two aviator bears in the airplane */}
         <img
-          src={asset("two-teddy-bears-airplane.png")}
+          src={asset("two-teddy-bears-airplane.webp")}
           alt="Dos ositos aviadores en una avioneta"
           className="cutout mx-auto -mt-2 w-[88%] animate-fly"
         />
-        <Decor src="three-pink-stars.png" className="-left-2 bottom-24 w-20" />
+        <Decor src="three-pink-stars.webp" className="-left-2 bottom-24 w-20" />
 
         <h2 className="font-display text-cocoa text-[clamp(2.25rem,11vw,3.75rem)]">
           {config.cover.bannerBottom}
@@ -107,12 +107,12 @@ export default function Invitation({ group }: { group?: Group }) {
         <div aria-hidden className="absolute inset-0">
           <div className="bg-rosefill absolute inset-x-0 bottom-[20%] top-[20%]" />
           <img
-            src={asset("pink-torn-paper-edge-tight.png")}
+            src={asset("pink-torn-paper-edge-tight.webp")}
             alt=""
             className="absolute inset-x-0 top-0 w-full -scale-x-100"
           />
           <img
-            src={asset("pink-torn-paper-edge-tight.png")}
+            src={asset("pink-torn-paper-edge-tight.webp")}
             alt=""
             className="absolute inset-x-0 bottom-0 w-full -scale-x-100 -scale-y-100"
           />
@@ -122,7 +122,7 @@ export default function Invitation({ group }: { group?: Group }) {
             <div className="space-y-4 text-white">
               <div className="flex flex-col items-center text-center">
                 <img
-                  src={asset("calendar-heart-single.png")}
+                  src={asset("calendar-heart-single.webp")}
                   alt=""
                   className="h-11 w-auto"
                 />
@@ -134,7 +134,7 @@ export default function Invitation({ group }: { group?: Group }) {
               </div>
               <div className="flex flex-col items-center text-center">
                 <img
-                  src={asset("alarm-clock-single.png")}
+                  src={asset("alarm-clock-single.webp")}
                   alt=""
                   className="h-12 w-auto"
                 />
@@ -144,7 +144,7 @@ export default function Invitation({ group }: { group?: Group }) {
               </div>
             </div>
             <img
-              src={asset("aviator-bear-waving-closeup.png")}
+              src={asset("aviator-bear-waving-closeup.webp")}
               alt="Osito aviador saludando"
               className="cutout w-1/2 max-w-[12rem]"
             />
@@ -161,18 +161,18 @@ export default function Invitation({ group }: { group?: Group }) {
           <CountdownBox dateISO={config.eventDateISO} />
         </div>
 
-        <Decor src="three-pink-stars.png" className="right-2 top-28 w-24" />
-        <Decor src="three-blue-stars.png" className="left-1 top-48 w-24" />
+        <Decor src="three-pink-stars.webp" className="right-2 top-28 w-24" />
+        <Decor src="three-blue-stars.webp" className="left-1 top-48 w-24" />
 
         {/* Girl bear waving over a soft blue watercolor splash */}
         <div className="relative mx-auto mt-6 w-[70%] max-w-[18rem]">
           <img
-            src={asset("soft-blue-watercolor-circle.png")}
+            src={asset("soft-blue-watercolor-circle.webp")}
             alt=""
             className="absolute inset-0 m-auto w-full scale-125 opacity-90"
           />
           <img
-            src={asset("girl-teddy-bear-bow.png")}
+            src={asset("girl-teddy-bear-bow.webp")}
             alt="Osita saludando con moño rosa"
             className="cutout relative w-full"
           />
@@ -198,16 +198,16 @@ export default function Invitation({ group }: { group?: Group }) {
             {ev.locationButton}
           </a>
         )}
-        <Decor src="blue-watercolor-star.png" className="-right-1 bottom-2 w-16" />
+        <Decor src="blue-watercolor-star.webp" className="-right-1 bottom-2 w-16" />
       </section>
 
       {/* ─────────────── GIFTS / DRESS CODE / RSVP ─────────────── */}
       <section className="relative px-6 pb-16 pt-2 text-center">
         {/* Aviator bear descending on a parachute, bird perched on top */}
         <div className="relative float-left mb-2 w-[42%] max-w-[12rem]">
-          <Decor src="cute-yellow-bird.png" className="left-1/2 top-0 z-10 w-12 -translate-x-1/2" />
+          <Decor src="cute-yellow-bird.webp" className="left-1/2 top-0 z-10 w-12 -translate-x-1/2" />
           <img
-            src={asset("aviator-bear-blue-parachute.png")}
+            src={asset("aviator-bear-blue-parachute.webp")}
             alt="Osito aviador en paracaídas"
             className="cutout w-full pt-6"
           />
@@ -247,22 +247,22 @@ export default function Invitation({ group }: { group?: Group }) {
           <span className="btn-pink mt-5 opacity-90">{ev.rsvpLabel}</span>
         )}
 
-        <Decor src="orange-watercolor-stars.png" className="left-1 bottom-24 w-20" />
-        <Decor src="orange-watercolor-stars.png" className="right-1 bottom-28 w-20 -scale-x-100" />
+        <Decor src="orange-watercolor-stars.webp" className="left-1 bottom-24 w-20" />
+        <Decor src="orange-watercolor-stars.webp" className="right-1 bottom-28 w-20 -scale-x-100" />
       </section>
 
       {/* ─────────────── CLOSING (blue torn-paper band) ─────────────── */}
       <section className="relative mt-14">
         <img
-          src={asset("blue-watercolor-torn-paper-border.png")}
+          src={asset("blue-watercolor-torn-paper-border.webp")}
           alt=""
           className="block w-full"
         />
         {/* Pink cloud straddling the torn edge */}
-        <Decor src="pink-watercolor-cloud.png" className="-left-5 -top-10 z-10 w-36" />
+        <Decor src="pink-watercolor-cloud.webp" className="-left-5 -top-10 z-10 w-36" />
         {/* Big girl bear sitting on the bottom edge, mirrored to face the text */}
         <img
-          src={asset("pink-bow-teddy-bear-scarf.png")}
+          src={asset("pink-bow-teddy-bear-scarf.webp")}
           alt="Osita con moño rosa"
           className="cutout absolute bottom-0 right-1 z-10 w-[44%] max-w-[14rem] -scale-x-100"
         />

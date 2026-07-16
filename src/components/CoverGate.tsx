@@ -61,7 +61,7 @@ export default function CoverGate({
             {/* Banner "Revelación" with the perched bird (slightly tilted) */}
             <div className="cover__banner relative">
               <img
-                src={asset("peach-watercolor-banner.png")}
+                src={asset("peach-watercolor-banner.webp")}
                 alt=""
                 className="cutout w-full"
               />
@@ -71,7 +71,7 @@ export default function CoverGate({
                 </span>
               </span>
               <img
-                src={asset("sleeping-baby-angel.png")}
+                src={asset("sleeping-baby-angel.webp")}
                 alt=""
                 className="cutout absolute -right-[3%] -top-[8%] w-[27%] max-w-[6.5rem]"
               />
@@ -79,7 +79,7 @@ export default function CoverGate({
 
             {/* Two aviator bears in the airplane */}
             <img
-              src={asset("two-teddy-bears-airplane-tight.png")}
+              src={asset("two-teddy-bears-airplane-tight.webp")}
               alt="Dos ositos aviadores en una avioneta"
               className="cutout cover__plane animate-fly"
             />
@@ -96,7 +96,7 @@ export default function CoverGate({
               aria-label={config.cover.sealText}
             >
               <img
-                src={asset("kraft-envelope-alt-tight.png")}
+                src={asset("kraft-envelope-alt-tight.webp")}
                 alt=""
                 className="env__paper"
               />
@@ -117,7 +117,7 @@ export default function CoverGate({
               </svg>
               <span className="env__seal-wrap">
                 <img
-                  src={asset("wax-seal-teddy.png")}
+                  src={asset("wax-seal-teddy.webp")}
                   alt=""
                   className="env__seal"
                 />

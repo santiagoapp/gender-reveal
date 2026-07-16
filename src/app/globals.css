@@ -21,7 +21,7 @@ body {
     radial-gradient(40rem 40rem at 96% 8%, rgba(158, 197, 255, 0.30), transparent 55%),
     radial-gradient(45rem 45rem at 50% 116%, rgba(176, 125, 86, 0.16), transparent 60%),
     linear-gradient(rgba(255, 255, 255, 0.66), rgba(255, 255, 255, 0.66)),
-    url("../../public/assets/cream-canvas-texture-background.jpg");
+    url("../../public/assets/cream-canvas-texture-background.webp");
   background-size:
     auto,
     auto,
@@ -38,7 +38,7 @@ body {
   background-color: #ffffff;
   background-image:
     linear-gradient(rgba(255, 255, 255, 0.66), rgba(255, 255, 255, 0.66)),
-    url("../../public/assets/cream-canvas-texture-background.jpg");
+    url("../../public/assets/cream-canvas-texture-background.webp");
   background-size: auto, 48rem auto;
   background-repeat: repeat, repeat;
   isolation: isolate;
@@ -49,7 +49,7 @@ body {
    and bottom rows match the torn slices' edge tone seamlessly. */
 .bg-rosefill {
   background-color: #e2abab;
-  background-image: url("../../public/assets/pink-watercolor-fill.jpg");
+  background-image: url("../../public/assets/pink-watercolor-fill.webp");
   background-size: 100% 100%;
 }
 

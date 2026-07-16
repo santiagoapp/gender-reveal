@@ -96,7 +96,7 @@ export default function GroupConfirm({ group }: { group: Group }) {
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-pink"
+            className="btn-pink animate-cta-glow"
           >
             {c.idle}
           </a>

@@ -50,6 +50,27 @@ const config: Config = {
           "50%": { transform: "translate(2%, 2.5%) rotate(1.5deg)" },
           "75%": { transform: "translate(3%, -2.5%) rotate(2deg)" },
         },
+        // Expanding, fading ring behind the play button (attention pulse).
+        pingRing: {
+          "0%": { transform: "scale(1)", opacity: "0.5" },
+          "100%": { transform: "scale(1.7)", opacity: "0" },
+        },
+        // Soft breathing scale for the play button.
+        breathe: {
+          "0%,100%": { transform: "scale(1)" },
+          "50%": { transform: "scale(1.06)" },
+        },
+        // Pulsing glow on the pink CTA (shadow only, so hover-scale still works).
+        ctaGlow: {
+          "0%,100%": {
+            boxShadow:
+              "inset 0 0 0 2px rgba(255,255,255,0.85), 0 8px 18px rgba(242,175,193,0.45)",
+          },
+          "50%": {
+            boxShadow:
+              "inset 0 0 0 2px rgba(255,255,255,0.85), 0 10px 28px rgba(242,175,193,0.9)",
+          },
+        },
       },
       animation: {
         floaty: "floaty 6s ease-in-out infinite",
@@ -57,6 +78,9 @@ const config: Config = {
         rise: "rise linear infinite",
         sway: "sway 5s ease-in-out infinite",
         fly: "fly 7s ease-in-out infinite",
+        "ping-ring": "pingRing 2s cubic-bezier(0,0,0.2,1) infinite",
+        breathe: "breathe 2.6s ease-in-out infinite",
+        "cta-glow": "ctaGlow 1.8s ease-in-out infinite",
       },
     },
   },

@@ -35,7 +35,7 @@ export const config = {
     locationName: "Parque Zaragoza",
     locationAddress: "Diagonal 84 # 76-34",
     locationArea: "Barrio La Española",
-    locationMapsUrl: "https://share.google/DoLfUBJWWMGWC7Wa7",
+    locationMapsUrl: "https://maps.app.goo.gl/J2CdRXoZty8G7kAv7?g_st=iw",
     locationButton: "Ver ubicación",
 
     // Regalos / código de vestimenta.
@@ -45,7 +45,7 @@ export const config = {
     dressCode: "Prendas de color azul o rosado",
 
     // Confirmación. {deadline} se reemplaza con rsvpDeadline al renderizar.
-    rsvpDeadline: "26 de julio",
+    rsvpDeadline: "21 de julio",
     note: "Para organizar todo con amor, agradecemos que nos confirmes tu asistencia hasta el {deadline}.",
     rsvpLabel: "CON LA MAMÁ",
     // Prefijo del saludo personalizado por grupo (portada e invitación).
@@ -79,7 +79,7 @@ export const config = {
 
   // Música de fondo (opcional). Coloca un archivo en /public, p. ej.
   // "/music/cancion.mp3". Déjalo vacío para ocultar el reproductor.
-  musicUrl: "",
+  musicUrl: "/this-will-be.mp3",
   music: {
     prompt:
       "Dale play y déjate envolver por la melodía que inspira este momento.",
