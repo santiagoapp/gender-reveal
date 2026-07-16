@@ -1,0 +1,51 @@
+{
+  "groups": [
+    {
+      "slug": "abuelitos-mama",
+      "title": "Abuelitos",
+      "members": [
+        { "id": "1", "name": "Marina" },
+        { "id": "2", "name": "Orlando" }
+      ]
+    },
+    {
+      "slug": "tio-marlon",
+      "title": "Tío Marlon",
+      "members": [{ "id": "3", "name": "Marlon" }]
+    },
+    {
+      "slug": "familia-ramirez-piamba",
+      "title": "Familia Ramirez Piamba",
+      "members": [
+        { "id": "4", "name": "Tío Arturo" },
+        { "id": "5", "name": "Tía Heidy" },
+        { "id": "6", "name": "Cesitar" },
+        { "id": "7", "name": "Tatiana" },
+        { "id": "8", "name": "Fabian" },
+        { "id": "9", "name": "Julieta" }
+      ]
+    },
+    {
+      "slug": "familia-ramirez-mieles",
+      "title": "Familia Ramirez Mieles",
+      "members": [
+        { "id": "10", "name": "Tío Carlos (1)" },
+        { "id": "11", "name": "Tía Helena (2)" },
+        { "id": "12", "name": "Lizeth" },
+        { "id": "13", "name": "Junior" },
+        { "id": "14", "name": "Laura" },
+        { "id": "15", "name": "Yenny" },
+        { "id": "16", "name": "Valeria" }
+      ]
+    },
+    {
+      "slug": "familia-ramirez-rincon",
+      "title": "Familia Ramirez Rincon",
+      "members": [
+        { "id": "17", "name": "Tío Beto (3)" },
+        { "id": "18", "name": "Amanda (4)" },
+        { "id": "19", "name": "Cristian David" }
+      ]
+    }
+  ]
+}

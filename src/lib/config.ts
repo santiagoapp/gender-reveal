@@ -48,6 +48,9 @@ export const config = {
     rsvpDeadline: "26 de julio",
     note: "Para organizar todo con amor, agradecemos que nos confirmes tu asistencia hasta el {deadline}.",
     rsvpLabel: "CON LA MAMÁ",
+    // Cierre sobre la franja azul al final de la invitación.
+    closingLine: "Tu presencia hará este momento aún más especial!",
+    closingHighlight: "¡No faltes!",
     // Kept for the legacy per-group RSVP route (src/app/[slug]).
     gift: "",
   },

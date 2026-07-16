@@ -10,14 +10,45 @@ body {
   @apply bg-cream text-ink font-body antialiased;
 }
 
-/* Watercolor paper backdrop: soft pink/blue glows + subtle paper grain */
+/* Watercolor paper backdrop: soft pink/blue glows over the woven canvas
+   texture used by the byyoya.com reference. The reference renders the
+   texture at 34% opacity on pure white, so a 66% white overlay sits
+   between the glows and the full-strength image. */
 .bg-paper {
-  background-color: #fdf6ee;
+  background-color: #ffffff;
   background-image:
     radial-gradient(40rem 40rem at 8% 4%, rgba(255, 179, 200, 0.30), transparent 55%),
     radial-gradient(40rem 40rem at 96% 8%, rgba(158, 197, 255, 0.30), transparent 55%),
     radial-gradient(45rem 45rem at 50% 116%, rgba(176, 125, 86, 0.16), transparent 60%),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+    linear-gradient(rgba(255, 255, 255, 0.66), rgba(255, 255, 255, 0.66)),
+    url("../../public/assets/cream-canvas-texture-background.jpg");
+  background-size:
+    auto,
+    auto,
+    auto,
+    auto,
+    48rem auto;
+  background-repeat: no-repeat, no-repeat, no-repeat, repeat, repeat;
+}
+
+/* Plain woven-canvas texture (no watercolor glows) for the invitation body.
+   Matches the reference: texture at ~34% opacity over pure white. */
+.bg-canvas {
+  background-color: #ffffff;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.66), rgba(255, 255, 255, 0.66)),
+    url("../../public/assets/cream-canvas-texture-background.jpg");
+  background-size: auto, 48rem auto;
+  background-repeat: repeat, repeat;
+}
+
+/* Continuous dusty-rose watercolor fill for the date/time band — a mirrored
+   stack cropped from the solid area of pink-torn-paper-edge.png so its top
+   and bottom rows match the torn slices' edge tone seamlessly. */
+.bg-rosefill {
+  background-color: #e2abab;
+  background-image: url("../../public/assets/pink-watercolor-fill.jpg");
+  background-size: 100% 100%;
 }
 
 .card {
@@ -62,15 +93,27 @@ body {
 
 /* ── Envelope cover ── */
 .cover {
-  @apply fixed inset-0 z-50 flex flex-col items-center justify-start overflow-y-auto px-5 py-6 text-center;
+  @apply fixed inset-0 z-50 flex flex-col items-center justify-center overflow-hidden px-5 text-center;
+  padding-top: max(env(safe-area-inset-top), 1rem);
+  padding-bottom: max(env(safe-area-inset-bottom), 1rem);
   transition:
     opacity 0.7s ease 0.45s,
     transform 0.7s ease 0.45s;
 }
-/* Inner column is vertically centered but can scroll on short screens. */
 .cover__inner {
-  @apply my-auto flex w-full max-w-[min(27rem,94vw)] flex-col items-center;
-  gap: clamp(0rem, 0.6vh, 0.4rem);
+  @apply flex w-full max-w-[min(27rem,94vw)] flex-col items-center;
+  gap: clamp(0.15rem, 1svh, 0.6rem);
+}
+/* Every element is also capped by viewport height so the whole cover
+   always fits on one screen — no scrolling on any phone. */
+.cover__banner {
+  width: min(100%, 25.5rem, 50svh);
+}
+.cover__plane {
+  width: min(64%, 16rem, 32svh);
+}
+.cover__title {
+  font-size: clamp(2rem, min(11vw, 6.5svh), 3.75rem);
 }
 .cover--opening {
   opacity: 0;
@@ -78,11 +121,12 @@ body {
   pointer-events: none;
 }
 
-/* Real kraft-paper envelope (PNG) with arched label + gold wax seal. */
+/* Real kraft-paper envelope (PNG) with arched label + gold wax seal.
+   The image is tightly cropped (422×339), so width also caps its height. */
 .env {
   position: relative;
   display: block;
-  width: clamp(17rem, 90vw, 25rem);
+  width: clamp(13rem, min(72vw, 38svh), 20rem);
   cursor: pointer;
 }
 .env__paper {
@@ -95,8 +139,8 @@ body {
 .env__arc {
   position: absolute;
   left: 50%;
-  top: 27%;
-  width: 52%;
+  top: 6.8%;
+  width: 65.7%;
   transform: translateX(-50%);
   fill: #fbf3e8;
   filter: drop-shadow(0 1px 2px rgba(74, 46, 22, 0.65));
@@ -107,8 +151,8 @@ body {
 .env__seal-wrap {
   position: absolute;
   left: 50%;
-  top: 46%;
-  width: 25%;
+  top: 51.6%;
+  width: 31.6%;
   transform: translate(-50%, -50%);
 }
 .env__seal {

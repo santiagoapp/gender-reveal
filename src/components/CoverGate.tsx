@@ -50,7 +50,7 @@ export default function CoverGate({
         >
           <div className="cover__inner">
             {/* Banner "Revelación" with the perched bird (slightly tilted) */}
-            <div className="relative w-[92%] max-w-[23rem] -rotate-3">
+            <div className="cover__banner relative">
               <img
                 src={asset("peach-watercolor-banner.png")}
                 alt=""
@@ -70,12 +70,12 @@ export default function CoverGate({
 
             {/* Two aviator bears in the airplane */}
             <img
-              src={asset("two-teddy-bears-airplane.png")}
+              src={asset("two-teddy-bears-airplane-tight.png")}
               alt="Dos ositos aviadores en una avioneta"
-              className="cutout -mt-[4%] w-[84%] max-w-[21rem]"
+              className="cutout cover__plane animate-fly"
             />
 
-            <h2 className="-mt-[2%] font-display text-cocoa text-[clamp(2.25rem,11vw,3.75rem)]">
+            <h2 className="cover__title font-display text-cocoa">
               {config.cover.bannerBottom}
             </h2>
 
@@ -83,11 +83,11 @@ export default function CoverGate({
             <button
               type="button"
               onClick={open}
-              className="env -mt-[2%] focus:outline-none"
+              className="env focus:outline-none"
               aria-label={config.cover.sealText}
             >
               <img
-                src={asset("kraft-envelope-alt.png")}
+                src={asset("kraft-envelope-alt-tight.png")}
                 alt=""
                 className="env__paper"
               />

@@ -1,6 +1,6 @@
 import { config } from "@/lib/config";
 import { asset } from "@/lib/assets";
-import type { Group } from "@/lib/sheet";
+import type { Group } from "@/lib/groups";
 import PlayButton from "./PlayButton";
 import CountdownBox from "./CountdownBox";
 import GroupConfirm from "./GroupConfirm";
@@ -37,7 +37,7 @@ function Decor({
 // shows the generic contact button.
 export default function Invitation({ group }: { group?: Group }) {
   return (
-    <div className="relative mx-auto w-full max-w-[30rem] overflow-hidden bg-cream font-body text-cocoa shadow-[0_0_60px_rgba(120,90,60,0.12)]">
+    <div className="bg-canvas relative mx-auto w-full max-w-[30rem] overflow-hidden font-body text-cocoa shadow-[0_0_60px_rgba(120,90,60,0.12)]">
       {/* ───────────────────────── HERO ───────────────────────── */}
       <section className="relative px-6 pb-4 pt-10 text-center">
         <Decor src="blue-watercolor-stars.png" className="left-3 top-6 w-24 rotate-[-6deg]" />
@@ -51,7 +51,7 @@ export default function Invitation({ group }: { group?: Group }) {
         </div>
 
         {/* Banner "Revelación" with the little bird perched at the end */}
-        <div className="relative mx-auto mt-8 w-[94%] max-w-[24rem] -rotate-3">
+        <div className="relative mx-auto mt-8 w-[94%] max-w-[24rem]">
           <img src={asset("peach-watercolor-banner.png")} alt="" className="cutout w-full" />
           <span className="absolute inset-0 flex items-center justify-center pr-[14%]">
             <span className="font-display text-cocoa drop-shadow-sm text-[clamp(2rem,9.5vw,3.4rem)]">
@@ -65,7 +65,7 @@ export default function Invitation({ group }: { group?: Group }) {
         <img
           src={asset("two-teddy-bears-airplane.png")}
           alt="Dos ositos aviadores en una avioneta"
-          className="cutout mx-auto -mt-2 w-[88%]"
+          className="cutout mx-auto -mt-2 w-[88%] animate-fly"
         />
         <Decor src="three-pink-stars.png" className="-left-2 bottom-24 w-20" />
 
@@ -88,20 +88,33 @@ export default function Invitation({ group }: { group?: Group }) {
 
       {/* ─────────────── DATE / TIME (pink torn-paper band) ─────────────── */}
       <section className="relative mt-6">
-        <img src={asset("pink-watercolor-torn-paper-border.png")} alt="" className="block w-full" />
-        <div className="relative -mt-px bg-rosepanel px-6 py-8">
+        {/* Torn dusty-rose watercolor panel (same art as the reference site).
+            Top slice is mirrored horizontally so the taller pink side sits on
+            the right; the bottom slice is its exact vertical mirror. The
+            rosefill band only shows if the content grows taller than the two
+            slices. */}
+        <div aria-hidden className="absolute inset-0">
+          <div className="bg-rosefill absolute inset-x-0 bottom-[20%] top-[20%]" />
+          <img
+            src={asset("pink-torn-paper-edge-tight.png")}
+            alt=""
+            className="absolute inset-x-0 top-0 w-full -scale-x-100"
+          />
+          <img
+            src={asset("pink-torn-paper-edge-tight.png")}
+            alt=""
+            className="absolute inset-x-0 bottom-0 w-full -scale-x-100 -scale-y-100"
+          />
+        </div>
+        <div className="relative px-6 pb-[16%] pt-[18%]">
           <div className="flex items-center justify-between gap-3">
-            <div className="space-y-6 text-white">
+            <div className="space-y-4 text-white">
               <div className="flex flex-col items-center text-center">
-                {/* Asset is white-on-black line art with two icons; blend out
-                    the black and crop to a single calendar. */}
-                <div className="h-16 w-16 overflow-hidden">
-                  <img
-                    src={asset("calendar-icons-with-hearts.png")}
-                    alt=""
-                    className="h-16 max-w-none mix-blend-screen"
-                  />
-                </div>
+                <img
+                  src={asset("calendar-heart-single.png")}
+                  alt=""
+                  className="h-11 w-auto"
+                />
                 <p className="mt-2 font-display leading-tight text-[clamp(1.25rem,5.5vw,1.7rem)]">
                   {ev.dateLabel}
                   <br />
@@ -109,14 +122,12 @@ export default function Invitation({ group }: { group?: Group }) {
                 </p>
               </div>
               <div className="flex flex-col items-center text-center">
-                <div className="h-16 w-[3.2rem] overflow-hidden">
-                  <img
-                    src={asset("two-alarm-clocks-outline.png")}
-                    alt=""
-                    className="h-16 max-w-none mix-blend-screen"
-                  />
-                </div>
-                <p className="mt-2 font-display text-[clamp(1.25rem,5.5vw,1.7rem)]">
+                <img
+                  src={asset("alarm-clock-single.png")}
+                  alt=""
+                  className="h-12 w-auto"
+                />
+                <p className="mt-1 font-display text-[clamp(1.25rem,5.5vw,1.7rem)]">
                   {ev.timeValue}
                 </p>
               </div>
@@ -128,11 +139,6 @@ export default function Invitation({ group }: { group?: Group }) {
             />
           </div>
         </div>
-        <img
-          src={asset("pink-watercolor-torn-paper-border.png")}
-          alt=""
-          className="block w-full -scale-y-100"
-        />
       </section>
 
       {/* ─────────────── COUNTDOWN + LOCATION ─────────────── */}
@@ -155,7 +161,7 @@ export default function Invitation({ group }: { group?: Group }) {
             className="absolute inset-0 m-auto w-full scale-125 opacity-90"
           />
           <img
-            src={asset("waving-bear-pink-bow.png")}
+            src={asset("girl-teddy-bear-bow.png")}
             alt="Osita saludando con moño rosa"
             className="cutout relative w-full"
           />
@@ -232,10 +238,31 @@ export default function Invitation({ group }: { group?: Group }) {
 
         <Decor src="orange-watercolor-stars.png" className="left-1 bottom-24 w-20" />
         <Decor src="orange-watercolor-stars.png" className="right-1 bottom-28 w-20 -scale-x-100" />
+      </section>
 
-        {/* Pink cloud + girl bear peeking from the bottom corner */}
-        <Decor src="pink-watercolor-cloud.png" className="-left-4 bottom-0 w-28" />
-        <Decor src="girl-teddy-bear-bow.png" className="-right-2 -bottom-2 w-28" />
+      {/* ─────────────── CLOSING (blue torn-paper band) ─────────────── */}
+      <section className="relative mt-14">
+        <img
+          src={asset("blue-watercolor-torn-paper-border.png")}
+          alt=""
+          className="block w-full"
+        />
+        {/* Pink cloud straddling the torn edge */}
+        <Decor src="pink-watercolor-cloud.png" className="-left-5 -top-10 z-10 w-36" />
+        {/* Big girl bear sitting on the bottom edge, mirrored to face the text */}
+        <img
+          src={asset("pink-bow-teddy-bear-scarf.png")}
+          alt="Osita con moño rosa"
+          className="cutout absolute bottom-0 right-1 z-10 w-[44%] max-w-[14rem] -scale-x-100"
+        />
+        <div className="absolute bottom-[7%] left-0 z-10 w-[58%] px-5 text-center text-white">
+          <p className="font-display leading-snug drop-shadow-sm text-[clamp(1.15rem,5vw,1.5rem)]">
+            {ev.closingLine}
+          </p>
+          <p className="mt-1 font-display drop-shadow-sm text-[clamp(1.6rem,7vw,2.1rem)]">
+            {ev.closingHighlight}
+          </p>
+        </div>
       </section>
     </div>
   );

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { config } from "@/lib/config";
 import MusicProvider from "@/components/MusicProvider";
@@ -6,6 +6,12 @@ import MusicProvider from "@/components/MusicProvider";
 export const metadata: Metadata = {
   title: `${config.event.title} · ${config.event.hosts}`,
   description: config.event.intro,
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({
@@ -27,7 +33,9 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body>
+      {/* Browser extensions inject attributes into <body> before React
+          hydrates; ignore attribute mismatches on this element only. */}
+      <body suppressHydrationWarning>
         <MusicProvider>
           <main className="bg-paper min-h-screen w-full">{children}</main>
         </MusicProvider>

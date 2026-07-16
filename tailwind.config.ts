@@ -43,12 +43,20 @@ const config: Config = {
           "0%,100%": { transform: "translateX(-8px)" },
           "50%": { transform: "translateX(8px)" },
         },
+        // Gentle wandering flight, like the byyoya.com reference airplane.
+        fly: {
+          "0%,100%": { transform: "translate(0, 0) rotate(0deg)" },
+          "25%": { transform: "translate(-2.5%, -3.5%) rotate(-2deg)" },
+          "50%": { transform: "translate(2%, 2.5%) rotate(1.5deg)" },
+          "75%": { transform: "translate(3%, -2.5%) rotate(2deg)" },
+        },
       },
       animation: {
         floaty: "floaty 6s ease-in-out infinite",
         pop: "pop 0.5s ease-out both",
         rise: "rise linear infinite",
         sway: "sway 5s ease-in-out infinite",
+        fly: "fly 7s ease-in-out infinite",
       },
     },
   },

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { config } from "@/lib/config";
-import type { Group } from "@/lib/sheet";
+import type { Group } from "@/lib/groups";
 
 type Status = "idle" | "loading" | "done" | "error";
 
