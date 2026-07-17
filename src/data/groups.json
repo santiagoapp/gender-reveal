@@ -305,7 +305,7 @@
       ]
     },
     {
-      "slug": "Matheo",
+      "slug": "matheo",
       "title": "Matheo",
       "members": [
         {
@@ -416,7 +416,7 @@
         },
         {
           "id": "54",
-          "name": "Verionica"
+          "name": "Veronica"
         },
         {
           "id": "55",
@@ -744,11 +744,15 @@
     },
     {
       "slug": "laura-cruz",
-      "title": "Laura Cruz",
+      "title": "Laura y Andrés",
       "members": [
         {
           "id": "98",
           "name": "Laura Cruz"
+        },
+        {
+          "id": "99",
+          "name": "Andrés"
         }
       ]
     },
@@ -757,7 +761,7 @@
       "title": "Sebastian Ramirez",
       "members": [
         {
-          "id": "99",
+          "id": "100",
           "name": "Sebastian Ramirez"
         }
       ]
